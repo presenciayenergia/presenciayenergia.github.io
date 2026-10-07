@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Presencia &amp; Energía — Soins énergétiques à Annecy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+@layer reset, tokens, base, layout, components;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  img, svg { display: block; max-width: 100%; height: auto; }
+  ul, ol { list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+}
+
+@layer tokens {
+  :root {
+    --color-bg: #e6ebe4;
+    --color-bg-alt: #dae2d8;
+    --color-surface: #eef2ec;
+    --color-text: #20302a;
+    --color-text-muted: #4f5f58;
+    --color-line: #b9c6bb;
+    --color-lavender: #c4b2e2;
+    --color-apricot: #f1c39b;
+    --color-jade: #93c2ae;
+    --color-cta: #20302a;
+    --color-cta-text: #eef2ec;
+
+    --font-display: 'Italiana', 'Didot', 'Bodoni 72', Georgia, serif;
+    --font-base: 'Karla', 'Segoe UI', system-ui, sans-serif;
+
+    --fs-xs: 1.3rem;
+    --fs-sm: 1.5rem;
+    --fs-base: 1.7rem;
+    --fs-md: 1.9rem;
+    --fs-h1: clamp(4.4rem, 11vw, 12rem);
+    --fs-h2: clamp(3.2rem, 6vw, 6.4rem);
+    --fs-h3: clamp(2.6rem, 3.6vw, 3.6rem);
+
+    --space-1: 0.4rem;
+    --space-2: 0.8rem;
+    --space-3: 1.2rem;
+    --space-4: 1.6rem;
+    --space-6: 2.4rem;
+    --space-8: 3.2rem;
+    --space-12: 4.8rem;
+    --space-16: 6.4rem;
+    --space-24: 9.6rem;
+
+    --radius-md: 1.2rem;
+    --radius-lg: 2.8rem;
+    --radius-full: 9999px;
+    --border-width: 0.1rem;
+    --shadow-soft: 0 1.2rem 4rem rgb(32 48 42 / 0.12);
+    --ease: cubic-bezier(.22, .8, .3, 1);
+    --breath: 10s;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #161c1a;
+      --color-bg-alt: #1d2522;
+      --color-surface: #222b28;
+      --color-text: #e3e9e2;
+      --color-text-muted: #a5b3ac;
+      --color-line: #34413b;
+      --color-lavender: #7d68a8;
+      --color-apricot: #b47d55;
+      --color-jade: #4f8a73;
+      --color-cta: #e3e9e2;
+      --color-cta-text: #161c1a;
+      --shadow-soft: 0 1.2rem 4rem rgb(0 0 0 / 0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --color-bg: #161c1a;
+    --color-bg-alt: #1d2522;
+    --color-surface: #222b28;
+    --color-text: #e3e9e2;
+    --color-text-muted: #a5b3ac;
+    --color-line: #34413b;
+    --color-lavender: #7d68a8;
+    --color-apricot: #b47d55;
+    --color-jade: #4f8a73;
+    --color-cta: #e3e9e2;
+    --color-cta-text: #161c1a;
+    --shadow-soft: 0 1.2rem 4rem rgb(0 0 0 / 0.4);
+  }
+}
+
+@layer base {
+  :root {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { font-size: 62.5%; scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    font-family: var(--font-base);
+    font-size: var(--fs-base);
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+  }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.04; }
+  :focus-visible { outline: 0.2rem solid var(--color-text); outline-offset: 0.3rem; }
+  .sr-only { position: absolute; width: 0.1rem; height: 0.1rem; margin: -0.1rem; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+}
+
+@layer layout {
+  .container { width: 100%; max-width: 118rem; margin-inline: auto; padding-inline: var(--space-6); }
+  .section { position: relative; padding-block: var(--space-16); border-top: var(--border-width) solid var(--color-line); }
+  .section__title { margin-bottom: var(--space-12); font-size: var(--fs-h2); }
+  @media (min-width: 48em) {
+    .container { padding-inline: var(--space-12); }
+    .section { padding-block: var(--space-24); }
+  }
+}
+
+@layer components {
+  /* Lien souligné animé */
+  .link { background: linear-gradient(currentColor, currentColor) 0 100% / 0 var(--border-width) no-repeat; transition: background-size 400ms var(--ease); }
+  .link:hover, .link:focus-visible { background-size: 100% var(--border-width); }
+
+  /* Navigation */
+  .nav { position: absolute; inset: env(safe-area-inset-top, 0px) 0 auto; z-index: 10; }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; padding-block: var(--space-6); }
+  .nav__brand { display: flex; gap: var(--space-2); align-items: center; font-family: var(--font-display); font-size: 2.4rem; }
+  .nav__mark { width: 1.4rem; height: 1.4rem; border-radius: var(--radius-full); background: conic-gradient(var(--color-lavender), var(--color-apricot), var(--color-jade), var(--color-lavender)); animation: spin 12s linear infinite; }
+  .nav__links { display: none; gap: var(--space-8); font-size: var(--fs-sm); }
+  @media (min-width: 56em) { .nav__links { display: flex; } }
+
+  /* Hero */
+  .hero { position: relative; display: grid; place-items: center; min-height: 100svh; overflow: hidden; text-align: center; }
+  .hero__aura {
+    position: absolute;
+    width: min(120vw, 92rem);
+    aspect-ratio: 1 / 1;
+    pointer-events: none;
+    transform: translate(var(--mx, 0), var(--my, 0));
+    transition: transform 1.6s var(--ease);
+  }
+  .hero__blob { position: absolute; inset: 18%; border-radius: var(--radius-full); filter: blur(5rem); opacity: 0.85; animation: breathe var(--breath) ease-in-out infinite; }
+  .hero__blob--lavender { background-color: var(--color-lavender); }
+  .hero__blob--apricot { inset: 30% 22% 14% 34%; background-color: var(--color-apricot); animation-delay: -2s; }
+  .hero__blob--jade { inset: 16% 36% 34% 16%; background-color: var(--color-jade); animation-delay: -4s; }
+  .hero__ring { position: absolute; inset: 24%; border: var(--border-width) solid var(--color-text); border-radius: var(--radius-full); opacity: 0.25; animation: ring var(--breath) ease-in-out infinite; }
+  .hero__ring--outer { inset: 12%; animation-delay: -1s; opacity: 0.12; }
+  .hero__motes { position: absolute; inset: 0; pointer-events: none; }
+  .hero__mote {
+    position: absolute;
+    bottom: -2rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-surface);
+    box-shadow: 0 0 1.2rem var(--color-apricot);
+    opacity: 0;
+    animation: rise 14s linear infinite;
+  }
+  .hero__mote:nth-child(1) { left: 12%; animation-delay: 0s; }
+  .hero__mote:nth-child(2) { left: 28%; animation-delay: -5s; animation-duration: 18s; }
+  .hero__mote:nth-child(3) { left: 46%; animation-delay: -9s; }
+  .hero__mote:nth-child(4) { left: 63%; animation-delay: -2s; animation-duration: 16s; }
+  .hero__mote:nth-child(5) { left: 78%; animation-delay: -11s; }
+  .hero__mote:nth-child(6) { left: 90%; animation-delay: -7s; animation-duration: 20s; }
+  .hero__content { position: relative; display: grid; gap: var(--space-6); justify-items: center; padding-inline: var(--space-6); }
+  .hero__title { max-width: 11ch; font-size: var(--fs-h1); letter-spacing: -0.01em; }
+  .hero__lead { max-width: 38ch; font-size: var(--fs-md); color: var(--color-text-muted); }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: center; margin-top: var(--space-2); }
+  .hero__breath {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+    padding: var(--space-2) var(--space-6);
+    border: var(--border-width) solid var(--color-line);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-sm);
+    background-color: color-mix(in srgb, var(--color-bg) 60%, transparent);
+    backdrop-filter: blur(0.8rem);
+  }
+  .hero__breath-word { display: inline-block; min-width: 7ch; font-style: italic; text-align: left; transition: opacity 600ms ease; }
+  .hero__scroll { position: absolute; bottom: var(--space-8); left: 50%; width: var(--border-width); height: 4.8rem; background-color: var(--color-text); opacity: 0.4; transform-origin: top; animation: drip 2.6s var(--ease) infinite; }
+
+  /* Boutons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-8);
+    border: var(--border-width) solid var(--color-cta);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    transition: transform 300ms var(--ease), background-color 300ms ease, color 300ms ease;
+  }
+  .btn:hover { transform: translateY(-0.2rem); }
+  .btn--plein { color: var(--color-cta-text); background-color: var(--color-cta); }
+  .btn--contour { color: var(--color-text); background-color: color-mix(in srgb, var(--color-bg) 50%, transparent); }
+  .btn--contour:hover { color: var(--color-cta-text); background-color: var(--color-cta); }
+
+  /* Bandeau de mots */
+  .ruban { overflow: hidden; padding-block: var(--space-6); border-top: var(--border-width) solid var(--color-line); }
+  .ruban__piste { display: flex; gap: var(--space-12); width: max-content; font-family: var(--font-display); font-size: var(--fs-h3); color: var(--color-text-muted); animation: defile 40s linear infinite; }
+  .ruban__mot { display: flex; gap: var(--space-12); align-items: center; }
+  .ruban__mot::after { content: ""; width: 1rem; height: 1rem; border-radius: var(--radius-full); background-color: var(--color-jade); }
+  .ruban__mot:nth-child(3n+2)::after { background-color: var(--color-apricot); }
+  .ruban__mot:nth-child(3n)::after { background-color: var(--color-lavender); }
+
+  /* Intro */
+  .intro { display: grid; gap: var(--space-8); }
+  .intro__title { font-size: var(--fs-h2); }
+  .intro__text { display: grid; gap: var(--space-4); max-width: 60ch; color: var(--color-text-muted); }
+  @media (min-width: 64em) { .intro { grid-template-columns: 5fr 6fr; gap: var(--space-16); align-items: start; } }
+
+  /* Le soin énergétique */
+  .energie { display: grid; gap: var(--space-12); align-items: center; }
+  .energie__text { display: grid; gap: var(--space-4); max-width: 56ch; color: var(--color-text-muted); }
+  .energie__text strong { font-weight: 600; color: var(--color-text); }
+  .energie__schema { position: relative; justify-self: center; width: min(100%, 36rem); aspect-ratio: 3 / 5; }
+  .energie__axe { position: absolute; top: 6%; bottom: 6%; left: 50%; width: var(--border-width); background-color: var(--color-line); }
+  .centres { position: absolute; inset: 6% 0; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+  .centre { position: relative; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; }
+  .centre__point { width: 1.4rem; height: 1.4rem; border-radius: var(--radius-full); background-color: var(--color-jade); }
+  .centre__onde { position: absolute; inset: 0; border: var(--border-width) solid var(--color-jade); border-radius: var(--radius-full); animation: onde 7s ease-out infinite; }
+  .centre__label { position: absolute; left: calc(100% + var(--space-4)); font-size: var(--fs-xs); white-space: nowrap; color: var(--color-text-muted); }
+  .centre:nth-child(even) .centre__label { right: calc(100% + var(--space-4)); left: auto; }
+  .centre:nth-child(3n+2) .centre__point { background-color: var(--color-apricot); }
+  .centre:nth-child(3n+2) .centre__onde { border-color: var(--color-apricot); }
+  .centre:nth-child(3n) .centre__point { background-color: var(--color-lavender); }
+  .centre:nth-child(3n) .centre__onde { border-color: var(--color-lavender); }
+  .centre:nth-child(1) .centre__onde { animation-delay: 0s; }
+  .centre:nth-child(2) .centre__onde { animation-delay: -1s; }
+  .centre:nth-child(3) .centre__onde { animation-delay: -2s; }
+  .centre:nth-child(4) .centre__onde { animation-delay: -3s; }
+  .centre:nth-child(5) .centre__onde { animation-delay: -4s; }
+  .centre:nth-child(6) .centre__onde { animation-delay: -5s; }
+  .centre:nth-child(7) .centre__onde { animation-delay: -6s; }
+  @media (min-width: 64em) { .energie { grid-template-columns: 7fr 5fr; gap: var(--space-24); } }
+
+  /* Soins */
+  .soin { display: grid; gap: var(--space-4); padding-block: var(--space-8); border-top: var(--border-width) solid var(--color-line); transition: padding-inline 500ms var(--ease), background-color 500ms ease; }
+  .soin:last-child { border-bottom: var(--border-width) solid var(--color-line); }
+  .soin:hover { padding-inline: var(--space-4); background-color: color-mix(in srgb, var(--color-surface) 60%, transparent); }
+  .soin__name { display: flex; gap: var(--space-4); align-items: center; font-size: var(--fs-h3); }
+  .soin__dot { flex: none; width: 1.6rem; height: 1.6rem; border-radius: var(--radius-full); transition: transform 500ms var(--ease); }
+  .soin:hover .soin__dot { transform: scale(1.6); }
+  .soin__dot--lavender { background-color: var(--color-lavender); }
+  .soin__dot--apricot { background-color: var(--color-apricot); }
+  .soin__dot--jade { background-color: var(--color-jade); }
+  .soin__desc { max-width: 52ch; color: var(--color-text-muted); }
+  .soin__meta { font-size: var(--fs-sm); }
+  @media (min-width: 64em) {
+    .soin { grid-template-columns: 5fr 6fr 2fr; gap: var(--space-12); align-items: baseline; }
+    .soin__meta { text-align: right; }
+  }
+
+  /* Accompagnement */
+  .accomp { background-color: var(--color-bg-alt); overflow: hidden; }
+  .accomp__intro { max-width: 56ch; margin-top: calc(var(--space-8) * -1); margin-bottom: var(--space-12); color: var(--color-text-muted); }
+  .parcours { display: grid; gap: var(--space-6); }
+  .parcour {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    isolation: isolate;
+    background-color: var(--color-surface);
+    transition: transform 500ms var(--ease), box-shadow 500ms ease;
+  }
+  .parcour::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -30%;
+    right: -30%;
+    width: 70%;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-full);
+    background-color: var(--halo);
+    filter: blur(4rem);
+    opacity: 0.55;
+    transition: transform 800ms var(--ease), opacity 800ms ease;
+  }
+  .parcour:hover { transform: translateY(-0.6rem); box-shadow: var(--shadow-soft); }
+  .parcour:hover::before { transform: scale(1.8); opacity: 0.8; }
+  .parcour--jade { --halo: var(--color-jade); }
+  .parcour--apricot { --halo: var(--color-apricot); }
+  .parcour--lavender { --halo: var(--color-lavender); }
+  .parcour__duree { font-size: var(--fs-sm); color: var(--color-text-muted); }
+  .parcour__titre { font-size: var(--fs-h3); }
+  .parcour__texte { color: var(--color-text-muted); }
+  .parcour__liste { display: grid; gap: var(--space-2); padding-top: var(--space-4); border-top: var(--border-width) solid var(--color-line); font-size: var(--fs-sm); }
+  .parcour__liste li { display: flex; gap: var(--space-2); }
+  .parcour__liste li::before { content: ""; flex: none; width: 0.6rem; height: 0.6rem; margin-top: 0.9rem; border-radius: var(--radius-full); background-color: var(--halo); }
+  .parcour__prix { margin-top: auto; padding-top: var(--space-4); font-family: var(--font-display); font-size: 3.2rem; }
+  .parcour__lien { justify-self: start; font-size: var(--fs-sm); font-weight: 600; }
+  @media (min-width: 64em) { .parcours { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Séance */
+  .etapes { display: grid; gap: var(--space-8); counter-reset: etape; }
+  .etape { display: grid; gap: var(--space-2); counter-increment: etape; }
+  .etape::before { content: counter(etape); font-family: var(--font-display); font-size: 5.6rem; line-height: 1; color: var(--color-text-muted); transition: color 400ms ease; }
+  .etape:hover::before { color: var(--color-apricot); }
+  .etape__name { font-weight: 600; }
+  .etape__text { color: var(--color-text-muted); }
+  @media (min-width: 48em) { .etapes { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 64em) { .etapes { grid-template-columns: repeat(4, 1fr); gap: var(--space-12); } }
+
+  /* Témoignages */
+  .temoignage { display: grid; justify-items: center; text-align: center; }
+  .temoignage__quote { max-width: 24ch; font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.25; transition: opacity 600ms ease; }
+  .temoignage__author { margin-top: var(--space-6); font-size: var(--fs-sm); color: var(--color-text-muted); transition: opacity 600ms ease; }
+  .temoignage__dots { display: flex; gap: var(--space-2); margin-top: var(--space-6); }
+  .temoignage__dot { width: 1rem; height: 1rem; border: var(--border-width) solid var(--color-text); border-radius: var(--radius-full); transition: background-color 300ms ease; }
+  .temoignage__dot[aria-current="true"] { background-color: var(--color-text); }
+  .is-fading { opacity: 0; }
+
+  /* FAQ */
+  .faq { display: grid; max-width: 80rem; }
+  .faq__item { border-top: var(--border-width) solid var(--color-line); }
+  .faq__item:last-child { border-bottom: var(--border-width) solid var(--color-line); }
+  .faq__q { display: flex; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-6); font-size: var(--fs-md); list-style: none; cursor: pointer; }
+  .faq__q::-webkit-details-marker { display: none; }
+  .faq__q::after { content: "+"; font-family: var(--font-display); font-size: 3rem; line-height: 1; transition: transform 400ms var(--ease); }
+  .faq__item[open] .faq__q::after { transform: rotate(45deg); }
+  .faq__a { max-width: 60ch; padding-bottom: var(--space-6); color: var(--color-text-muted); }
+
+  /* Rendez-vous */
+  .rdv { display: grid; gap: var(--space-12); }
+  .rdv__title { font-size: var(--fs-h2); }
+  .rdv__text { max-width: 44ch; margin-top: var(--space-4); color: var(--color-text-muted); }
+  .rdv__infos { display: grid; gap: var(--space-4); }
+  .rdv__row { display: flex; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: var(--border-width) solid var(--color-line); }
+  .rdv__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-4); }
+  @media (min-width: 64em) { .rdv { grid-template-columns: 1fr 1fr; gap: var(--space-24); align-items: end; } }
+
+  /* Footer */
+  .footer { padding-block: var(--space-12) calc(var(--space-24) + env(safe-area-inset-bottom, 0px)); border-top: var(--border-width) solid var(--color-line); font-size: var(--fs-sm); color: var(--color-text-muted); }
+  .footer__inner { display: grid; gap: var(--space-8); }
+  .footer__brand { font-family: var(--font-display); font-size: 3.2rem; color: var(--color-text); }
+  .footer__cols { display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .footer__head { margin-bottom: var(--space-2); font-weight: 600; color: var(--color-text); }
+  .footer__list { display: grid; gap: var(--space-1); }
+
+  /* Lecteur d'ambiances */
+  .sons {
+    position: fixed;
+    right: var(--space-4);
+    bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    z-index: 20;
+    display: flex;
+    gap: var(--space-1);
+    align-items: center;
+    padding: var(--space-1);
+    border: var(--border-width) solid var(--color-line);
+    border-radius: var(--radius-full);
+    background-color: color-mix(in srgb, var(--color-surface) 75%, transparent);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(1.2rem);
+  }
+  .sons__label { padding-inline: var(--space-3) var(--space-1); font-size: var(--fs-xs); color: var(--color-text-muted); }
+  .son {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: var(--radius-full);
+    transition: background-color 300ms ease;
+  }
+  .son svg { width: 2.2rem; height: 2.2rem; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .son:hover { background-color: var(--color-bg-alt); }
+  .son::after { content: ""; position: absolute; inset: 0; border: var(--border-width) solid var(--son-color); border-radius: var(--radius-full); opacity: 0; }
+  .son[aria-pressed="true"] { background-color: var(--son-color); }
+  .son[aria-pressed="true"]::after { animation: pulse 2.4s ease-out infinite; }
+  .son--bol { --son-color: var(--color-apricot); }
+  .son--souffle { --son-color: var(--color-jade); }
+  .son--carillon { --son-color: var(--color-lavender); }
+  .son--musique { --son-color: var(--color-jade); }
+  .sons__sep { width: var(--border-width); height: 2.4rem; margin-inline: var(--space-1); background-color: var(--color-line); }
+
+  /* Voile d'accueil */
+  .accueil {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: var(--space-6);
+    padding-top: calc(var(--space-6) + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+    text-align: center;
+    background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
+    backdrop-filter: blur(2.4rem);
+    transition: opacity 1.2s var(--ease), visibility 1.2s;
+  }
+  .accueil--cache { opacity: 0; visibility: hidden; }
+  .accueil__boite { display: grid; gap: var(--space-6); justify-items: center; max-width: 46rem; }
+  .accueil__cercle { position: relative; width: 9.6rem; aspect-ratio: 1 / 1; }
+  .accueil__cercle::before, .accueil__cercle::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius-full); }
+  .accueil__cercle::before { background: conic-gradient(var(--color-lavender), var(--color-apricot), var(--color-jade), var(--color-lavender)); filter: blur(1.6rem); animation: breathe var(--breath) ease-in-out infinite; }
+  .accueil__cercle::after { border: var(--border-width) solid var(--color-text); opacity: 0.3; animation: ring var(--breath) ease-in-out infinite; }
+  .accueil__titre { font-size: var(--fs-h2); }
+  .accueil__texte { color: var(--color-text-muted); }
+  .accueil__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: center; }
+  .is-locked { overflow: hidden; }
+  .sons__tooltip { position: absolute; bottom: calc(100% + var(--space-2)); right: 0; padding: var(--space-1) var(--space-3); border-radius: var(--radius-md); font-size: var(--fs-xs); white-space: nowrap; color: var(--color-cta-text); background-color: var(--color-cta); opacity: 0; pointer-events: none; transform: translateY(0.4rem); transition: opacity 300ms ease, transform 300ms var(--ease); }
+  .son:hover .sons__tooltip, .son:focus-visible .sons__tooltip { opacity: 1; transform: none; }
+
+  @keyframes breathe { 0%, 100% { transform: scale(0.82); } 40% { transform: scale(1.08); } }
+  @keyframes ring { 0%, 100% { transform: scale(0.86); opacity: 0.12; } 40% { transform: scale(1.12); opacity: 0.4; } }
+  @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 0.9; } 100% { transform: translateY(-105vh) translateX(3rem); opacity: 0; } }
+  @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1) translateY(4.8rem); opacity: 0; } }
+  @keyframes defile { to { transform: translateX(-50%); } }
+  @keyframes onde { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(3.2); opacity: 0; } }
+  @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+  @keyframes spin { to { transform: rotate(1turn); } }
+}
+
+  /* Sélecteur de langue */
+  .langues { display: flex; gap: var(--space-1); align-items: center; }
+  .langue {
+    position: relative;
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+    transition: color 300ms ease;
+  }
+  .langue::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -0.2rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-jade);
+    transform: translateX(-50%) scale(0);
+    transition: transform 400ms var(--ease);
+  }
+  .langue:hover { color: var(--color-text); }
+  .langue[aria-pressed="true"] { color: var(--color-text); }
+  .langue[aria-pressed="true"]::after { transform: translateX(-50%) scale(1); }
+  .nav__droite { display: flex; gap: var(--space-8); align-items: center; }
+  [data-i18n], [data-i18n-html] { transition: opacity 260ms ease; }
+  .is-switching [data-i18n], .is-switching [data-i18n-html] { opacity: 0; }
+
+</style>
+</head>
+<body>
+
+<div class="accueil" role="dialog" aria-modal="true" aria-labelledby="accueil-titre" data-accueil>
+  <div class="accueil__boite">
+    <span class="accueil__cercle" aria-hidden="true"></span>
+    <div class="langues" role="group" data-i18n-attr="aria-label:lang.label" data-langues></div>
+    <h2 class="accueil__titre" id="accueil-titre" data-i18n="accueil.titre"></h2>
+    <p class="accueil__texte" data-i18n="accueil.texte"></p>
+    <div class="accueil__actions">
+      <button class="btn btn--plein" type="button" data-entrer="son" data-i18n="accueil.son"></button>
+      <button class="btn btn--contour" type="button" data-entrer="silence" data-i18n="accueil.silence"></button>
+    </div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="#"><span class="nav__mark" aria-hidden="true"></span>Presencia &amp; Energía</a>
+    <div class="nav__droite">
+      <nav data-i18n-attr="aria-label:nav.aria">
+        <ul class="nav__links">
+          <li><a class="link" href="#energie" data-i18n="nav.energie"></a></li>
+          <li><a class="link" href="#soins" data-i18n="nav.soins"></a></li>
+          <li><a class="link" href="#accompagnement" data-i18n="nav.accomp"></a></li>
+          <li><a class="link" href="#faq" data-i18n="nav.faq"></a></li>
+          <li><a class="link" href="#rdv" data-i18n="nav.rdv"></a></li>
+        </ul>
+      </nav>
+      <div class="langues" role="group" data-i18n-attr="aria-label:lang.label" data-langues></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" data-hero>
+    <div class="hero__aura" aria-hidden="true">
+      <span class="hero__blob hero__blob--lavender"></span>
+      <span class="hero__blob hero__blob--apricot"></span>
+      <span class="hero__blob hero__blob--jade"></span>
+      <span class="hero__ring"></span>
+      <span class="hero__ring hero__ring--outer"></span>
+    </div>
+    <div class="hero__motes" aria-hidden="true">
+      <span class="hero__mote"></span><span class="hero__mote"></span><span class="hero__mote"></span>
+      <span class="hero__mote"></span><span class="hero__mote"></span><span class="hero__mote"></span>
+    </div>
+    <div class="hero__content">
+      <h1 class="hero__title" data-i18n="hero.titre"></h1>
+      <p class="hero__lead" data-i18n="hero.lead"></p>
+      <p class="hero__breath"><span data-i18n="hero.breath"></span> <span class="hero__breath-word" data-breath></span></p>
+      <div class="hero__actions">
+        <a class="btn btn--plein" href="#rdv" data-i18n="hero.cta1"></a>
+        <a class="btn btn--contour" href="#energie" data-i18n="hero.cta2"></a>
+      </div>
+    </div>
+    <span class="hero__scroll" aria-hidden="true"></span>
+  </section>
+
+  <div class="ruban" aria-hidden="true">
+    <div class="ruban__piste">
+      <span class="ruban__mot" data-i18n="r1"></span><span class="ruban__mot" data-i18n="r2"></span><span class="ruban__mot" data-i18n="r3"></span><span class="ruban__mot" data-i18n="r4"></span><span class="ruban__mot" data-i18n="r5"></span><span class="ruban__mot" data-i18n="r6"></span>
+      <span class="ruban__mot" data-i18n="r1"></span><span class="ruban__mot" data-i18n="r2"></span><span class="ruban__mot" data-i18n="r3"></span><span class="ruban__mot" data-i18n="r4"></span><span class="ruban__mot" data-i18n="r5"></span><span class="ruban__mot" data-i18n="r6"></span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container intro">
+      <h2 class="intro__title" data-i18n="intro.titre"></h2>
+      <div class="intro__text">
+        <p data-i18n="intro.p1"></p>
+        <p data-i18n="intro.p2"></p>
+        <p data-i18n="intro.p3"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="energie">
+    <div class="container energie">
+      <div>
+        <h2 class="section__title" data-i18n="energie.titre"></h2>
+        <div class="energie__text">
+          <p data-i18n="energie.p1"></p>
+          <p data-i18n-html="energie.p2"></p>
+          <p data-i18n="energie.p3"></p>
+          <p><a class="link" href="#faq" data-i18n="energie.lien"></a></p>
+        </div>
+      </div>
+      <div class="energie__schema" aria-hidden="true">
+        <span class="energie__axe"></span>
+        <ul class="centres">
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c1"></span></li>
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c2"></span></li>
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c3"></span></li>
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c4"></span></li>
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c5"></span></li>
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c6"></span></li>
+          <li class="centre"><span class="centre__onde"></span><span class="centre__point"></span><span class="centre__label" data-i18n="c7"></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="soins">
+    <div class="container">
+      <h2 class="section__title" data-i18n="soins.titre"></h2>
+      <ul>
+        <li class="soin">
+          <h3 class="soin__name"><span class="soin__dot soin__dot--lavender" aria-hidden="true"></span><span data-i18n="s1.nom"></span></h3>
+          <p class="soin__desc" data-i18n="s1.desc"></p>
+          <p class="soin__meta" data-i18n="s1.meta"></p>
+        </li>
+        <li class="soin">
+          <h3 class="soin__name"><span class="soin__dot soin__dot--apricot" aria-hidden="true"></span><span data-i18n="s2.nom"></span></h3>
+          <p class="soin__desc" data-i18n="s2.desc"></p>
+          <p class="soin__meta" data-i18n="s2.meta"></p>
+        </li>
+        <li class="soin">
+          <h3 class="soin__name"><span class="soin__dot soin__dot--jade" aria-hidden="true"></span><span data-i18n="s3.nom"></span></h3>
+          <p class="soin__desc" data-i18n="s3.desc"></p>
+          <p class="soin__meta" data-i18n="s3.meta"></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section accomp" id="accompagnement">
+    <div class="container">
+      <h2 class="section__title" data-i18n="acc.titre"></h2>
+      <p class="accomp__intro" data-i18n="acc.intro"></p>
+      <ul class="parcours">
+        <li class="parcour parcour--jade">
+          <p class="parcour__duree" data-i18n="p1.duree"></p>
+          <h3 class="parcour__titre" data-i18n="p1.titre"></h3>
+          <p class="parcour__texte" data-i18n="p1.texte"></p>
+          <ul class="parcour__liste">
+            <li data-i18n="p1.l1"></li>
+            <li data-i18n="p1.l2"></li>
+            <li data-i18n="p1.l3"></li>
+          </ul>
+          <p class="parcour__prix" data-i18n="p1.prix"></p>
+          <a class="parcour__lien link" href="#rdv" data-i18n="p1.lien"></a>
+        </li>
+        <li class="parcour parcour--apricot">
+          <p class="parcour__duree" data-i18n="p2.duree"></p>
+          <h3 class="parcour__titre" data-i18n="p2.titre"></h3>
+          <p class="parcour__texte" data-i18n="p2.texte"></p>
+          <ul class="parcour__liste">
+            <li data-i18n="p2.l1"></li>
+            <li data-i18n="p2.l2"></li>
+            <li data-i18n="p2.l3"></li>
+          </ul>
+          <p class="parcour__prix" data-i18n="p2.prix"></p>
+          <a class="parcour__lien link" href="#rdv" data-i18n="p2.lien"></a>
+        </li>
+        <li class="parcour parcour--lavender">
+          <p class="parcour__duree" data-i18n="p3.duree"></p>
+          <h3 class="parcour__titre" data-i18n="p3.titre"></h3>
+          <p class="parcour__texte" data-i18n="p3.texte"></p>
+          <ul class="parcour__liste">
+            <li data-i18n="p3.l1"></li>
+            <li data-i18n="p3.l2"></li>
+            <li data-i18n="p3.l3"></li>
+          </ul>
+          <p class="parcour__prix" data-i18n="p3.prix"></p>
+          <a class="parcour__lien link" href="#rdv" data-i18n="p3.lien"></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="seance">
+    <div class="container">
+      <h2 class="section__title" data-i18n="seance.titre"></h2>
+      <ol class="etapes">
+        <li class="etape"><p class="etape__name" data-i18n="e1.nom"></p><p class="etape__text" data-i18n="e1.texte"></p></li>
+        <li class="etape"><p class="etape__name" data-i18n="e2.nom"></p><p class="etape__text" data-i18n="e2.texte"></p></li>
+        <li class="etape"><p class="etape__name" data-i18n="e3.nom"></p><p class="etape__text" data-i18n="e3.texte"></p></li>
+        <li class="etape"><p class="etape__name" data-i18n="e4.nom"></p><p class="etape__text" data-i18n="e4.texte"></p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <figure class="container temoignage">
+      <blockquote class="temoignage__quote" data-quote></blockquote>
+      <figcaption class="temoignage__author" data-author></figcaption>
+      <div class="temoignage__dots" data-dots></div>
+    </figure>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section__title" data-i18n="faq.titre"></h2>
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__q" data-i18n="f1.q"></summary>
+          <p class="faq__a" data-i18n="f1.a"></p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q" data-i18n="f2.q"></summary>
+          <p class="faq__a" data-i18n="f2.a"></p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q" data-i18n="f3.q"></summary>
+          <p class="faq__a" data-i18n="f3.a"></p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q" data-i18n="f4.q"></summary>
+          <p class="faq__a" data-i18n="f4.a"></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rdv">
+    <div class="container rdv">
+      <div>
+        <h2 class="rdv__title" data-i18n="rdv.titre"></h2>
+        <p class="rdv__text" data-i18n="rdv.texte"></p>
+      </div>
+      <div class="rdv__infos">
+        <p class="rdv__row"><span data-i18n="rdv.adresse"></span><a class="link" href="https://www.openstreetmap.org/search?query=Annecy" target="_blank" rel="noopener">12 quai de Vicogne, Annecy</a></p>
+        <p class="rdv__row"><span data-i18n="rdv.tel"></span><a class="link" href="tel:+33600000000">+33 6 00 00 00 00</a></p>
+        <p class="rdv__row"><span data-i18n="rdv.mail"></span><a class="link" href="mailto:contact@exemple.fr">contact@exemple.fr</a></p>
+        <p class="rdv__row"><span data-i18n="rdv.horaires"></span><span data-i18n="rdv.horairesVal"></span></p>
+        <div class="rdv__actions">
+          <a class="btn btn--plein" href="mailto:contact@exemple.fr" data-i18n="rdv.cta"></a>
+          <a class="btn btn--contour" href="tel:+33600000000" data-i18n="rdv.appeler"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__brand">Presencia &amp; Energía</p>
+    <div class="footer__cols">
+      <div>
+        <p class="footer__head" data-i18n="ft.cabinet"></p>
+        <ul class="footer__list">
+          <li><a class="link" href="#energie" data-i18n="nav.energie"></a></li>
+          <li><a class="link" href="#soins" data-i18n="nav.soins"></a></li>
+          <li><a class="link" href="#accompagnement" data-i18n="nav.accomp"></a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__head" data-i18n="ft.infos"></p>
+        <ul class="footer__list">
+          <li><a class="link" href="#seance" data-i18n="ft.seance"></a></li>
+          <li><a class="link" href="#faq" data-i18n="nav.faq"></a></li>
+          <li><a class="link" href="#rdv" data-i18n="nav.rdv"></a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__head" data-i18n="ft.suivre"></p>
+        <ul class="footer__list">
+          <li><a class="link" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a class="link" href="mailto:contact@exemple.fr" data-i18n="ft.lettre"></a></li>
+          <li><a class="link" href="#" data-i18n="ft.legal"></a></li>
+        </ul>
+      </div>
+    </div>
+    <p data-i18n="ft.copy"></p>
+  </div>
+</footer>
+
+<div class="sons" role="group" data-i18n-attr="aria-label:sons.aria">
+  <span class="sons__label" data-i18n="sons.label"></span>
+  <button class="son son--musique" type="button" aria-pressed="false" data-musique>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
+    <span class="sons__tooltip" data-i18n="tip.musique"></span>
+  </button>
+  <span class="sons__sep" aria-hidden="true"></span>
+  <button class="son son--bol" type="button" aria-pressed="false" data-son="bol">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0Z"/><path d="M8 20h8"/><path d="M9 7c0-1.5 1-1.5 1-3M13 7c0-1.5 1-1.5 1-3"/></svg>
+    <span class="sons__tooltip" data-i18n="tip.bol"></span>
+  </button>
+  <button class="son son--souffle" type="button" aria-pressed="false" data-son="souffle">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h11a3 3 0 1 0-3-3"/><path d="M3 13h15a3 3 0 1 1-3 3"/><path d="M3 17h6"/></svg>
+    <span class="sons__tooltip" data-i18n="tip.souffle"></span>
+  </button>
+  <button class="son son--carillon" type="button" aria-pressed="false" data-son="carillon">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16"/><path d="M7 3v9M12 3v13M17 3v7"/><circle cx="7" cy="14" r="2"/><circle cx="12" cy="18" r="2"/><circle cx="17" cy="12" r="2"/></svg>
+    <span class="sons__tooltip" data-i18n="tip.carillon"></span>
+  </button>
+</div>
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const T = {
+    fr: {
+      "meta.titre": "Presencia & Energía — Soins énergétiques à Annecy",
+      "lang.label": "Langue",
+      "nav.aria": "Navigation principale",
+      "nav.energie": "Le soin énergétique", "nav.soins": "Soins", "nav.accomp": "Accompagnement", "nav.faq": "Questions", "nav.rdv": "Rendez-vous",
+      "accueil.titre": "Bienvenue",
+      "accueil.texte": "Ce site s'accompagne d'une musique douce qui évolue au fil de votre visite. Vous pourrez la couper à tout moment, en bas à droite.",
+      "accueil.son": "Entrer avec le son", "accueil.silence": "Entrer en silence",
+      "hero.titre": "Revenir à soi, doucement",
+      "hero.lead": "Soins énergétiques et accompagnement à Annecy, pour relâcher les tensions et retrouver un souffle calme.",
+      "hero.breath": "Respirez avec le cercle :",
+      "breath.in": "inspirez", "breath.out": "expirez", "breath.slow": "lentement",
+      "hero.cta1": "Réserver une séance", "hero.cta2": "Découvrir le soin",
+      "r1": "Ancrage", "r2": "Apaisement", "r3": "Souffle", "r4": "Présence", "r5": "Équilibre", "r6": "Douceur",
+      "intro.titre": "Un temps pour déposer ce qui pèse",
+      "intro.p1": "Je reçois dans un cabinet lumineux, face au lac, des personnes traversées par le stress, la fatigue ou une période de transition.",
+      "intro.p2": "Chaque soin s'appuie sur l'écoute, le toucher léger et le son, sans jamais remplacer un suivi médical.",
+      "intro.p3": "Vous repartez plus posé, avec une ou deux pratiques simples à refaire chez vous.",
+      "energie.titre": "Le soin énergétique",
+      "energie.p1": "Le soin énergétique part d'une idée simple : le corps, les émotions et la respiration forment un tout, et une tension quelque part se ressent ailleurs.",
+      "energie.p2": "Par l'<strong>imposition des mains</strong>, le <strong>son</strong> et la <strong>respiration guidée</strong>, je vous aide à relâcher ce qui se crispe et à retrouver une circulation plus fluide.",
+      "energie.p3": "Il n'y a rien à croire ni à réussir : vous restez habillé, allongé, et vous accueillez simplement ce que vous ressentez.",
+      "energie.lien": "Lire les questions fréquentes",
+      "c1": "Clarté", "c2": "Intuition", "c3": "Expression", "c4": "Cœur", "c5": "Confiance", "c6": "Émotions", "c7": "Ancrage",
+      "soins.titre": "Les soins",
+      "s1.nom": "Harmonisation", "s1.desc": "Un soin global, allongé et habillé, par imposition des mains, pour apaiser le système nerveux et rééquilibrer l'ensemble du corps.", "s1.meta": "60 min · 70 €",
+      "s2.nom": "Magnétisme", "s2.desc": "Un travail ciblé sur une zone de tension, une douleur diffuse ou un sommeil perturbé, en complément de votre suivi habituel.", "s2.meta": "45 min · 55 €",
+      "s3.nom": "Bain sonore", "s3.desc": "Bols chantants et gong vous enveloppent de vibrations lentes pendant que la respiration ralentit d'elle-même.", "s3.meta": "50 min · 60 €",
+      "acc.titre": "L'accompagnement",
+      "acc.intro": "Une séance soulage, plusieurs séances installent un changement. Je vous propose trois façons de cheminer, selon le temps et l'envie que vous avez.",
+      "p1.duree": "Une séance", "p1.titre": "Pause", "p1.texte": "Pour découvrir le soin ou souffler pendant une période chargée.",
+      "p1.l1": "Échange de début de séance", "p1.l2": "Soin au choix", "p1.l3": "Une pratique à refaire chez soi", "p1.prix": "70 €", "p1.lien": "Réserver une pause",
+      "p2.duree": "Trois séances sur un mois", "p2.titre": "Traversée", "p2.texte": "Pour accompagner un passage : fatigue, changement de rythme, sommeil difficile.",
+      "p2.l1": "Bilan de départ et d'arrivée", "p2.l2": "Soins adaptés à chaque étape", "p2.l3": "Enregistrement audio de respiration", "p2.prix": "190 €", "p2.lien": "Commencer la traversée",
+      "p3.duree": "Six séances sur trois mois", "p3.titre": "Enracinement", "p3.texte": "Pour installer durablement de nouveaux appuis et une pratique personnelle.",
+      "p3.l1": "Suivi par message entre les séances", "p3.l2": "Un bain sonore collectif offert", "p3.l3": "Carnet de pratiques personnalisé", "p3.prix": "360 €", "p3.lien": "S'enraciner",
+      "seance.titre": "Comment se passe une séance",
+      "e1.nom": "L'échange", "e1.texte": "Nous prenons dix minutes pour parler de ce qui vous amène et de ce que vous attendez.",
+      "e2.nom": "L'installation", "e2.texte": "Vous vous allongez, habillé, sous une couverture, dans une lumière tamisée.",
+      "e3.nom": "Le soin", "e3.texte": "Mains posées ou à distance, son des bols : vous n'avez rien d'autre à faire que respirer.",
+      "e4.nom": "Le retour", "e4.texte": "Nous parlons de vos ressentis et je vous confie une pratique simple pour les jours suivants.",
+      "temoignage": "Témoignage",
+      "temoignages": [
+        ["« Je suis repartie avec la sensation d'avoir dormi une nuit entière. »", "Claire, venue pour un bain sonore"],
+        ["« Pour la première fois depuis des mois, mes épaules sont redescendues. »", "Julien, parcours Traversée"],
+        ["« Un lieu doux, une écoute rare. J'y retourne à chaque changement de saison. »", "Amel, parcours Enracinement"]
+      ],
+      "faq.titre": "Questions fréquentes",
+      "f1.q": "Faut-il croire à l'énergie pour que le soin fonctionne ?", "f1.a": "Non. Beaucoup de personnes viennent par curiosité. Le soin repose sur la détente, l'attention et la respiration : il suffit d'être d'accord pour essayer.",
+      "f2.q": "Est-ce que cela remplace un traitement ?", "f2.a": "Jamais. Le soin énergétique vient en complément d'un suivi médical. Je ne pose aucun diagnostic et ne modifie aucun traitement.",
+      "f3.q": "Que dois-je apporter ?", "f3.a": "Une tenue confortable et des chaussettes chaudes. Couverture, coussins et tisane vous attendent au cabinet.",
+      "f4.q": "Les séances à distance sont-elles possibles ?", "f4.a": "Oui, pour l'harmonisation et la respiration guidée, en visio. Il suffit d'un endroit calme où vous allonger.",
+      "rdv.titre": "Prendre rendez-vous", "rdv.texte": "Les séances ont lieu du mardi au samedi, au cabinet ou à distance pour l'harmonisation.",
+      "rdv.adresse": "Adresse", "rdv.tel": "Téléphone", "rdv.mail": "Courriel", "rdv.horaires": "Horaires", "rdv.horairesVal": "9 h – 19 h",
+      "rdv.cta": "Réserver une séance", "rdv.appeler": "Appeler",
+      "ft.cabinet": "Le cabinet", "ft.infos": "Infos pratiques", "ft.seance": "Déroulé d'une séance", "ft.suivre": "Suivre", "ft.lettre": "Lettre saisonnière", "ft.legal": "Mentions légales",
+      "ft.copy": "© 2026 Presencia & Energía, soins énergétiques à Annecy. Les soins énergétiques ne remplacent pas un avis médical.",
+      "sons.aria": "Ambiances sonores", "sons.label": "Ambiance",
+      "tip.musique": "Musique de fond", "tip.bol": "Bol chantant", "tip.souffle": "Nappe apaisante", "tip.carillon": "Carillon"
+    },
+    en: {
+      "meta.titre": "Presencia & Energía — Energy healing in Annecy",
+      "lang.label": "Language",
+      "nav.aria": "Main navigation",
+      "nav.energie": "Energy healing", "nav.soins": "Treatments", "nav.accomp": "Guidance", "nav.faq": "Questions", "nav.rdv": "Book",
+      "accueil.titre": "Welcome",
+      "accueil.texte": "This site comes with soft music that evolves as you browse. You can turn it off at any time, bottom right.",
+      "accueil.son": "Enter with sound", "accueil.silence": "Enter in silence",
+      "hero.titre": "Come back to yourself, gently",
+      "hero.lead": "Energy healing and guidance in Annecy, to release tension and find a calm breath again.",
+      "hero.breath": "Breathe with the circle:",
+      "breath.in": "breathe in", "breath.out": "breathe out", "breath.slow": "slowly",
+      "hero.cta1": "Book a session", "hero.cta2": "Discover the treatment",
+      "r1": "Grounding", "r2": "Calm", "r3": "Breath", "r4": "Presence", "r5": "Balance", "r6": "Softness",
+      "intro.titre": "A moment to set down what weighs on you",
+      "intro.p1": "In a bright room facing the lake, I welcome people going through stress, fatigue or a time of transition.",
+      "intro.p2": "Each session relies on listening, light touch and sound, and never replaces medical care.",
+      "intro.p3": "You leave feeling more settled, with one or two simple practices to repeat at home.",
+      "energie.titre": "Energy healing",
+      "energie.p1": "Energy healing starts from a simple idea: body, emotions and breath form a whole, and tension in one place is felt elsewhere.",
+      "energie.p2": "Through <strong>laying on of hands</strong>, <strong>sound</strong> and <strong>guided breathing</strong>, I help you release what tightens and find a smoother flow.",
+      "energie.p3": "There is nothing to believe and nothing to achieve: you stay dressed, lying down, and simply welcome what you feel.",
+      "energie.lien": "Read the frequent questions",
+      "c1": "Clarity", "c2": "Intuition", "c3": "Expression", "c4": "Heart", "c5": "Confidence", "c6": "Emotions", "c7": "Grounding",
+      "soins.titre": "Treatments",
+      "s1.nom": "Harmonization", "s1.desc": "A whole-body session, lying down and dressed, through laying on of hands, to soothe the nervous system and rebalance the body.", "s1.meta": "60 min · €70",
+      "s2.nom": "Magnetic healing", "s2.desc": "Focused work on an area of tension, diffuse pain or disturbed sleep, alongside your usual care.", "s2.meta": "45 min · €55",
+      "s3.nom": "Sound bath", "s3.desc": "Singing bowls and gong wrap you in slow vibrations while your breathing slows down on its own.", "s3.meta": "50 min · €60",
+      "acc.titre": "Guidance",
+      "acc.intro": "One session brings relief, several sessions bring change. I offer three paths, depending on your time and wishes.",
+      "p1.duree": "One session", "p1.titre": "Pause", "p1.texte": "To discover the treatment or catch your breath during a busy time.",
+      "p1.l1": "Opening conversation", "p1.l2": "Treatment of your choice", "p1.l3": "One practice to repeat at home", "p1.prix": "€70", "p1.lien": "Book a pause",
+      "p2.duree": "Three sessions over a month", "p2.titre": "Crossing", "p2.texte": "To support a transition: fatigue, a change of pace, difficult sleep.",
+      "p2.l1": "Starting and closing review", "p2.l2": "Treatments adapted to each step", "p2.l3": "Breathing audio recording", "p2.prix": "€190", "p2.lien": "Begin the crossing",
+      "p3.duree": "Six sessions over three months", "p3.titre": "Rooting", "p3.texte": "To build lasting new anchors and a personal practice.",
+      "p3.l1": "Message support between sessions", "p3.l2": "One group sound bath included", "p3.l3": "Personal practice notebook", "p3.prix": "€360", "p3.lien": "Take root",
+      "seance.titre": "How a session unfolds",
+      "e1.nom": "Talking", "e1.texte": "We take ten minutes to talk about what brings you here and what you hope for.",
+      "e2.nom": "Settling in", "e2.texte": "You lie down, dressed, under a blanket, in soft light.",
+      "e3.nom": "The treatment", "e3.texte": "Hands on or at a distance, the sound of bowls: all you have to do is breathe.",
+      "e4.nom": "Closing", "e4.texte": "We talk about what you felt and I give you a simple practice for the days ahead.",
+      "temoignage": "Testimonial",
+      "temoignages": [
+        ["“I left feeling as if I had slept a whole night.”", "Claire, after a sound bath"],
+        ["“For the first time in months, my shoulders finally dropped.”", "Julien, Crossing path"],
+        ["“A gentle place, rare attention. I come back with every change of season.”", "Amel, Rooting path"]
+      ],
+      "faq.titre": "Frequent questions",
+      "f1.q": "Do I need to believe in energy for it to work?", "f1.a": "No. Many people come out of curiosity. The treatment relies on relaxation, attention and breathing: you only need to be willing to try.",
+      "f2.q": "Does it replace a medical treatment?", "f2.a": "Never. Energy healing complements medical care. I make no diagnosis and change no treatment.",
+      "f3.q": "What should I bring?", "f3.a": "Comfortable clothes and warm socks. Blanket, cushions and herbal tea are waiting for you.",
+      "f4.q": "Are remote sessions possible?", "f4.a": "Yes, for harmonization and guided breathing, by video call. All you need is a quiet place to lie down.",
+      "rdv.titre": "Book a session", "rdv.texte": "Sessions take place Tuesday to Saturday, in person or remotely for harmonization.",
+      "rdv.adresse": "Address", "rdv.tel": "Phone", "rdv.mail": "Email", "rdv.horaires": "Hours", "rdv.horairesVal": "9 am – 7 pm",
+      "rdv.cta": "Book a session", "rdv.appeler": "Call",
+      "ft.cabinet": "The practice", "ft.infos": "Practical info", "ft.seance": "How a session unfolds", "ft.suivre": "Follow", "ft.lettre": "Seasonal letter", "ft.legal": "Legal notice",
+      "ft.copy": "© 2026 Presencia & Energía, energy healing in Annecy. Energy healing does not replace medical advice.",
+      "sons.aria": "Soundscapes", "sons.label": "Ambience",
+      "tip.musique": "Background music", "tip.bol": "Singing bowl", "tip.souffle": "Soothing drone", "tip.carillon": "Wind chimes"
+    },
+    es: {
+      "meta.titre": "Presencia & Energía — Terapias energéticas en Annecy",
+      "lang.label": "Idioma",
+      "nav.aria": "Navegación principal",
+      "nav.energie": "La terapia energética", "nav.soins": "Terapias", "nav.accomp": "Acompañamiento", "nav.faq": "Preguntas", "nav.rdv": "Cita",
+      "accueil.titre": "Bienvenida",
+      "accueil.texte": "Este sitio va acompañado de una música suave que evoluciona durante tu visita. Puedes apagarla en cualquier momento, abajo a la derecha.",
+      "accueil.son": "Entrar con sonido", "accueil.silence": "Entrar en silencio",
+      "hero.titre": "Volver a ti, con suavidad",
+      "hero.lead": "Terapias energéticas y acompañamiento en Annecy, para soltar tensiones y recuperar una respiración tranquila.",
+      "hero.breath": "Respira con el círculo:",
+      "breath.in": "inspira", "breath.out": "espira", "breath.slow": "despacio",
+      "hero.cta1": "Reservar una sesión", "hero.cta2": "Descubrir la terapia",
+      "r1": "Arraigo", "r2": "Calma", "r3": "Aliento", "r4": "Presencia", "r5": "Equilibrio", "r6": "Dulzura",
+      "intro.titre": "Un tiempo para soltar lo que pesa",
+      "intro.p1": "Recibo en una consulta luminosa, frente al lago, a personas que atraviesan estrés, cansancio o una etapa de transición.",
+      "intro.p2": "Cada sesión se apoya en la escucha, el tacto ligero y el sonido, sin sustituir nunca un seguimiento médico.",
+      "intro.p3": "Sales más sereno, con una o dos prácticas sencillas para repetir en casa.",
+      "energie.titre": "La terapia energética",
+      "energie.p1": "La terapia energética parte de una idea sencilla: el cuerpo, las emociones y la respiración forman un todo, y una tensión en un lugar se siente en otro.",
+      "energie.p2": "Mediante la <strong>imposición de manos</strong>, el <strong>sonido</strong> y la <strong>respiración guiada</strong>, te ayudo a soltar lo que se tensa y a recuperar una circulación más fluida.",
+      "energie.p3": "No hay nada que creer ni que lograr: permaneces vestido, tumbado, y simplemente acoges lo que sientes.",
+      "energie.lien": "Leer las preguntas frecuentes",
+      "c1": "Claridad", "c2": "Intuición", "c3": "Expresión", "c4": "Corazón", "c5": "Confianza", "c6": "Emociones", "c7": "Arraigo",
+      "soins.titre": "Las terapias",
+      "s1.nom": "Armonización", "s1.desc": "Una sesión global, tumbado y vestido, mediante imposición de manos, para calmar el sistema nervioso y reequilibrar todo el cuerpo.", "s1.meta": "60 min · 70 €",
+      "s2.nom": "Magnetismo", "s2.desc": "Un trabajo localizado sobre una zona de tensión, un dolor difuso o un sueño alterado, como complemento de tu seguimiento habitual.", "s2.meta": "45 min · 55 €",
+      "s3.nom": "Baño de sonido", "s3.desc": "Cuencos tibetanos y gong te envuelven en vibraciones lentas mientras la respiración se calma por sí sola.", "s3.meta": "50 min · 60 €",
+      "acc.titre": "El acompañamiento",
+      "acc.intro": "Una sesión alivia, varias sesiones instalan un cambio. Te propongo tres caminos, según tu tiempo y tus ganas.",
+      "p1.duree": "Una sesión", "p1.titre": "Pausa", "p1.texte": "Para descubrir la terapia o tomar aire en una época cargada.",
+      "p1.l1": "Conversación inicial", "p1.l2": "Terapia a elegir", "p1.l3": "Una práctica para casa", "p1.prix": "70 €", "p1.lien": "Reservar una pausa",
+      "p2.duree": "Tres sesiones en un mes", "p2.titre": "Travesía", "p2.texte": "Para acompañar un cambio: cansancio, nuevo ritmo, sueño difícil.",
+      "p2.l1": "Balance inicial y final", "p2.l2": "Terapias adaptadas a cada etapa", "p2.l3": "Grabación de respiración", "p2.prix": "190 €", "p2.lien": "Empezar la travesía",
+      "p3.duree": "Seis sesiones en tres meses", "p3.titre": "Arraigo", "p3.texte": "Para instalar de forma duradera nuevos apoyos y una práctica personal.",
+      "p3.l1": "Seguimiento por mensaje entre sesiones", "p3.l2": "Un baño de sonido grupal incluido", "p3.l3": "Cuaderno de prácticas personalizado", "p3.prix": "360 €", "p3.lien": "Echar raíces",
+      "seance.titre": "Cómo es una sesión",
+      "e1.nom": "La conversación", "e1.texte": "Dedicamos diez minutos a hablar de lo que te trae y de lo que esperas.",
+      "e2.nom": "La instalación", "e2.texte": "Te tumbas, vestido, bajo una manta, con una luz tenue.",
+      "e3.nom": "La terapia", "e3.texte": "Manos apoyadas o a distancia, sonido de cuencos: solo tienes que respirar.",
+      "e4.nom": "El cierre", "e4.texte": "Hablamos de lo que has sentido y te propongo una práctica sencilla para los días siguientes.",
+      "temoignage": "Testimonio",
+      "temoignages": [
+        ["«Salí con la sensación de haber dormido una noche entera.»", "Claire, tras un baño de sonido"],
+        ["«Por primera vez en meses, mis hombros por fin bajaron.»", "Julien, camino Travesía"],
+        ["«Un lugar dulce, una escucha poco común. Vuelvo en cada cambio de estación.»", "Amel, camino Arraigo"]
+      ],
+      "faq.titre": "Preguntas frecuentes",
+      "f1.q": "¿Hay que creer en la energía para que funcione?", "f1.a": "No. Mucha gente viene por curiosidad. La terapia se basa en la relajación, la atención y la respiración: basta con estar dispuesto a probar.",
+      "f2.q": "¿Sustituye a un tratamiento médico?", "f2.a": "Nunca. La terapia energética complementa el seguimiento médico. No hago diagnósticos ni modifico tratamientos.",
+      "f3.q": "¿Qué debo traer?", "f3.a": "Ropa cómoda y calcetines calientes. Manta, cojines e infusión te esperan en la consulta.",
+      "f4.q": "¿Son posibles las sesiones a distancia?", "f4.a": "Sí, para la armonización y la respiración guiada, por videollamada. Solo necesitas un lugar tranquilo donde tumbarte.",
+      "rdv.titre": "Pedir cita", "rdv.texte": "Las sesiones tienen lugar de martes a sábado, en consulta o a distancia para la armonización.",
+      "rdv.adresse": "Dirección", "rdv.tel": "Teléfono", "rdv.mail": "Correo", "rdv.horaires": "Horario", "rdv.horairesVal": "9:00 – 19:00",
+      "rdv.cta": "Reservar una sesión", "rdv.appeler": "Llamar",
+      "ft.cabinet": "La consulta", "ft.infos": "Información práctica", "ft.seance": "Cómo es una sesión", "ft.suivre": "Seguir", "ft.lettre": "Carta de temporada", "ft.legal": "Aviso legal",
+      "ft.copy": "© 2026 Presencia & Energía, terapias energéticas en Annecy. Las terapias energéticas no sustituyen el consejo médico.",
+      "sons.aria": "Ambientes sonoros", "sons.label": "Ambiente",
+      "tip.musique": "Música de fondo", "tip.bol": "Cuenco tibetano", "tip.souffle": "Manto sonoro", "tip.carillon": "Campanillas"
+    }
+  };
+
+  const LANGS = [["fr", "Français"], ["en", "English"], ["es", "Español"]];
+  const stocker = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const lire = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+
+  let lang = lire('lang');
+  if (!T[lang]) {
+    const nav = (navigator.language || 'fr').slice(0, 2).toLowerCase();
+    lang = T[nav] ? nav : 'fr';
+  }
+  const t = (k) => T[lang][k] ?? T.fr[k] ?? '';
+
+  const appliquer = () => {
+    document.documentElement.lang = lang;
+    document.title = t('meta.titre');
+    document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-html]').forEach((el) => { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+      el.dataset.i18nAttr.split(';').forEach((p) => {
+        const [attr, key] = p.split(':');
+        el.setAttribute(attr, t(key));
+      });
+    });
+    document.querySelectorAll('.langue').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    majTemoignage(false);
+    majDots();
+    if (reduce) word.textContent = t('breath.slow');
+  };
+
+  const changerLangue = (l) => {
+    if (l === lang) return;
+    lang = l;
+    stocker('lang', l);
+    if (reduce) { appliquer(); return; }
+    document.body.classList.add('is-switching');
+    setTimeout(() => {
+      appliquer();
+      requestAnimationFrame(() => document.body.classList.remove('is-switching'));
+    }, 260);
+  };
+
+  document.querySelectorAll('[data-langues]').forEach((grp) => {
+    LANGS.forEach(([code, nom]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'langue';
+      b.dataset.lang = code;
+      b.lang = code;
+      b.textContent = code;
+      b.title = nom;
+      b.setAttribute('aria-label', nom);
+      b.addEventListener('click', () => changerLangue(code));
+      grp.append(b);
+    });
+  });
+
+  // Respiration
+  const word = document.querySelector('[data-breath]');
+  let phase = 'in';
+  const setWord = (p) => {
+    phase = p;
+    word.classList.add('is-fading');
+    setTimeout(() => { word.textContent = t('breath.' + phase); word.classList.remove('is-fading'); }, 300);
+  };
+  if (!reduce) {
+    const cycle = () => { setWord('in'); setTimeout(() => setWord('out'), 4000); };
+    cycle();
+    setInterval(cycle, 10000);
+  }
+
+  // Aura qui suit le pointeur
+  const hero = document.querySelector('[data-hero]');
+  const aura = hero.querySelector('.hero__aura');
+  if (!reduce) {
+    hero.addEventListener('pointermove', (e) => {
+      const r = hero.getBoundingClientRect();
+      aura.style.setProperty('--mx', `${((e.clientX - r.left) / r.width - 0.5) * 6}rem`);
+      aura.style.setProperty('--my', `${((e.clientY - r.top) / r.height - 0.5) * 6}rem`);
+    });
+  }
+
+  // Témoignages
+  const quote = document.querySelector('[data-quote]');
+  const author = document.querySelector('[data-author]');
+  const dots = document.querySelector('[data-dots]');
+  let current = 0;
+  const majTemoignage = (fondu = true) => {
+    const [q, a] = t('temoignages')[current];
+    if (!fondu) { quote.textContent = q; author.textContent = a; return; }
+    quote.classList.add('is-fading');
+    author.classList.add('is-fading');
+    setTimeout(() => {
+      quote.textContent = q;
+      author.textContent = a;
+      quote.classList.remove('is-fading');
+      author.classList.remove('is-fading');
+    }, 500);
+  };
+  const majDots = () => {
+    dots.querySelectorAll('button').forEach((b, n) => {
+      b.setAttribute('aria-current', String(n === current));
+      b.setAttribute('aria-label', `${t('temoignage')} ${n + 1}`);
+    });
+  };
+  const show = (i) => { current = i; majTemoignage(); majDots(); };
+  T.fr.temoignages.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'temoignage__dot';
+    b.type = 'button';
+    b.addEventListener('click', () => show(i));
+    dots.append(b);
+  });
+  if (!reduce) setInterval(() => show((current + 1) % T.fr.temoignages.length), 8000);
+
+  appliquer();
+
+// Ambiances sonores (Web Audio, aucun fichier externe)
+  let ctx, master;
+  const audio = () => {
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain();
+      master.gain.value = 0.5;
+      const verb = ctx.createConvolver();
+      const len = ctx.sampleRate * 3.5;
+      const buf = ctx.createBuffer(2, len, ctx.sampleRate);
+      for (let c = 0; c < 2; c++) {
+        const d = buf.getChannelData(c);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.5);
+      }
+      verb.buffer = buf;
+      const wet = ctx.createGain();
+      wet.gain.value = 0.45;
+      master.connect(ctx.destination);
+      master.connect(verb).connect(wet).connect(ctx.destination);
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  };
+
+  const tone = (freq, type, peak, attack, decay, dest = master) => {
+    const t = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = type;
+    o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(peak, t + attack);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + attack + decay);
+    o.connect(g).connect(dest);
+    o.start(t);
+    o.stop(t + attack + decay + 0.1);
+  };
+
+  const sons = {
+    bol() {
+      const notes = [196, 220, 261.6];
+      let n = 0;
+      const strike = () => {
+        const f = notes[n++ % notes.length];
+        [[1, 0.22], [2.76, 0.08], [5.4, 0.035], [1.004, 0.18]].forEach(([r, a]) => tone(f * r, 'sine', a, 0.02, 7));
+      };
+      strike();
+      const id = setInterval(strike, 6500);
+      return () => clearInterval(id);
+    },
+    souffle() {
+      const out = ctx.createGain();
+      out.gain.setValueAtTime(0.0001, ctx.currentTime);
+      out.gain.exponentialRampToValueAtTime(0.09, ctx.currentTime + 3);
+      const filtre = ctx.createBiquadFilter();
+      filtre.type = 'lowpass';
+      filtre.frequency.value = 500;
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      lfo.frequency.value = 0.1;
+      lfoGain.gain.value = 300;
+      lfo.connect(lfoGain).connect(filtre.frequency);
+      filtre.connect(out).connect(master);
+      const oscs = [110, 164.8, 220, 277.2].flatMap((f) => [-6, 6].map((d) => {
+        const o = ctx.createOscillator();
+        o.type = 'sawtooth';
+        o.frequency.value = f;
+        o.detune.value = d;
+        o.connect(filtre);
+        o.start();
+        return o;
+      }));
+      lfo.start();
+      return () => {
+        const t = ctx.currentTime;
+        out.gain.cancelScheduledValues(t);
+        out.gain.setValueAtTime(out.gain.value, t);
+        out.gain.exponentialRampToValueAtTime(0.0001, t + 2);
+        setTimeout(() => { oscs.forEach((o) => o.stop()); lfo.stop(); }, 2200);
+      };
+    },
+    carillon() {
+      const gamme = [523.3, 587.3, 659.3, 784, 880, 1046.5, 1174.7];
+      let id;
+      const ding = () => {
+        const f = gamme[Math.floor(Math.random() * gamme.length)];
+        tone(f, 'triangle', 0.07, 0.005, 3.5);
+        tone(f * 3.01, 'sine', 0.015, 0.005, 1.5);
+        id = setTimeout(ding, 500 + Math.random() * 2200);
+      };
+      ding();
+      return () => clearTimeout(id);
+    }
+  };
+
+  const musique = () => {
+    const out = ctx.createGain();
+    out.gain.setValueAtTime(0.0001, ctx.currentTime);
+    out.gain.exponentialRampToValueAtTime(0.55, ctx.currentTime + 4);
+    const filtre = ctx.createBiquadFilter();
+    filtre.type = 'lowpass';
+    filtre.frequency.value = 1100;
+    filtre.connect(out).connect(master);
+
+    const accords = [
+      [146.8, 220, 293.7, 370],
+      [123.5, 185, 246.9, 293.7],
+      [98, 196, 246.9, 293.7],
+      [110, 220, 277.2, 329.6],
+      [82.4, 164.8, 246.9, 329.6]
+    ];
+    const etincelles = [587.3, 659.3, 740, 880, 987.8];
+
+    const voix = (f, volume, attaque, tenue, relache, type = 'sine', detune = 0) => {
+      const t = ctx.currentTime;
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = type;
+      o.frequency.value = f;
+      o.detune.value = detune;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(volume, t + attaque);
+      g.gain.setValueAtTime(volume, t + attaque + tenue);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + attaque + tenue + relache);
+      o.connect(g).connect(filtre);
+      o.start(t);
+      o.stop(t + attaque + tenue + relache + 0.1);
+    };
+
+    let courant = 0;
+    const jouer = () => {
+      let suivant;
+      do { suivant = Math.floor(Math.random() * accords.length); } while (suivant === courant);
+      courant = suivant;
+      accords[courant].forEach((f, i) => {
+        voix(f, 0.05, 4, 4, 6, 'sine', -4);
+        voix(f, 0.03, 4.5, 3.5, 6, 'triangle', 5);
+        if (i === 0) voix(f / 2, 0.06, 5, 4, 6);
+      });
+      if (Math.random() < 0.6) {
+        setTimeout(() => {
+          const f = etincelles[Math.floor(Math.random() * etincelles.length)];
+          voix(f, 0.02, 0.01, 0.1, 4, 'sine');
+        }, 2000 + Math.random() * 4000);
+      }
+    };
+    jouer();
+    const id = setInterval(jouer, 8000);
+
+    return () => {
+      clearInterval(id);
+      const t = ctx.currentTime;
+      out.gain.cancelScheduledValues(t);
+      out.gain.setValueAtTime(out.gain.value, t);
+      out.gain.exponentialRampToValueAtTime(0.0001, t + 3);
+      setTimeout(() => out.disconnect(), 3200);
+    };
+  };
+
+  let stopMusique = null;
+  const btnMusique = document.querySelector('[data-musique]');
+  const basculerMusique = (on) => {
+    audio();
+    if (on && !stopMusique) stopMusique = musique();
+    if (!on && stopMusique) { stopMusique(); stopMusique = null; }
+    btnMusique.setAttribute('aria-pressed', String(Boolean(stopMusique)));
+  };
+  btnMusique.addEventListener('click', () => basculerMusique(!stopMusique));
+
+  const accueil = document.querySelector('[data-accueil]');
+  document.body.classList.add('is-locked');
+  accueil.querySelector('[data-entrer="son"]').focus();
+  const entrer = (avecSon) => {
+    accueil.classList.add('accueil--cache');
+    document.body.classList.remove('is-locked');
+    if (avecSon) basculerMusique(true);
+    setTimeout(() => accueil.setAttribute('hidden', ''), 1200);
+  };
+  accueil.querySelectorAll('[data-entrer]').forEach((b) => {
+    b.addEventListener('click', () => entrer(b.dataset.entrer === 'son'));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !accueil.hasAttribute('hidden')) entrer(false);
+  });
+
+  const actifs = {};
+  document.querySelectorAll('[data-son]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const nom = btn.dataset.son;
+      audio();
+      if (actifs[nom]) {
+        actifs[nom]();
+        delete actifs[nom];
+        btn.setAttribute('aria-pressed', 'false');
+      } else {
+        actifs[nom] = sons[nom]();
+        btn.setAttribute('aria-pressed', 'true');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
