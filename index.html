@@ -99,15 +99,15 @@
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  html { font-size: 62.5%; scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html { font-size: 62.5%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
   body {
     font-family: var(--font-base);
     font-size: var(--fs-base);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.65;
     color: var(--color-text);
     background-color: var(--color-bg);
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.04; }
   :focus-visible { outline: 0.2rem solid var(--color-text); outline-offset: 0.3rem; }
@@ -134,12 +134,93 @@
   .link:hover, .link:focus-visible { background-size: 100% var(--border-width); }
 
   /* Navigation */
-  .nav { position: absolute; inset: env(safe-area-inset-top, 0px) 0 auto; z-index: 10; }
-  .nav__inner { display: flex; align-items: center; justify-content: space-between; padding-block: var(--space-6); }
-  .nav__brand { display: flex; gap: var(--space-2); align-items: center; font-family: var(--font-display); font-size: 2.4rem; }
-  .nav__mark { width: 1.4rem; height: 1.4rem; border-radius: var(--radius-full); background: conic-gradient(var(--color-lavender), var(--color-apricot), var(--color-jade), var(--color-lavender)); animation: spin 12s linear infinite; }
-  .nav__links { display: none; gap: var(--space-8); font-size: var(--fs-sm); }
-  @media (min-width: 56em) { .nav__links { display: flex; } }
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 30;
+    padding-top: env(safe-area-inset-top, 0px);
+    border-bottom: var(--border-width) solid transparent;
+    transition: background-color 400ms ease, border-color 400ms ease, backdrop-filter 400ms ease;
+  }
+  .nav--scrolled {
+    border-bottom-color: var(--color-line);
+    background-color: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    backdrop-filter: blur(1.6rem);
+    -webkit-backdrop-filter: blur(1.6rem);
+  }
+  .nav__inner { display: flex; gap: var(--space-4); align-items: center; justify-content: space-between; padding-block: var(--space-3); }
+  .nav__brand { display: flex; gap: var(--space-2); align-items: center; min-width: 0; font-family: var(--font-display); font-size: 2rem; white-space: nowrap; }
+  .nav__mark { flex: none; width: 1.2rem; height: 1.2rem; border-radius: var(--radius-full); background: conic-gradient(var(--color-lavender), var(--color-apricot), var(--color-jade), var(--color-lavender)); animation: spin 12s linear infinite; }
+  .nav__droite { display: none; gap: var(--space-8); align-items: center; }
+  .nav__links { display: flex; gap: var(--space-6); font-size: var(--fs-sm); }
+  .nav__burger {
+    position: relative;
+    flex: none;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: var(--radius-full);
+  }
+  .nav__burger-ligne {
+    position: absolute;
+    left: 1.2rem;
+    width: 2rem;
+    height: 0.15rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-text);
+    transition: transform 500ms var(--ease), width 500ms var(--ease);
+  }
+  .nav__burger-ligne:first-child { top: 1.8rem; }
+  .nav__burger-ligne:last-child { top: 2.5rem; width: 1.4rem; }
+  .nav__burger[aria-expanded="true"] .nav__burger-ligne:first-child { transform: translateY(0.35rem) rotate(45deg); }
+  .nav__burger[aria-expanded="true"] .nav__burger-ligne:last-child { width: 2rem; transform: translateY(-0.35rem) rotate(-45deg); }
+  @media (min-width: 48em) {
+    .nav__inner { padding-block: var(--space-4); }
+    .nav__brand { font-size: 2.4rem; }
+  }
+  @media (min-width: 64em) {
+    .nav__droite { display: flex; }
+    .nav__burger { display: none; }
+  }
+
+  /* Menu mobile plein écran */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    display: grid;
+    align-content: center;
+    gap: var(--space-12);
+    padding: calc(var(--space-24) + env(safe-area-inset-top, 0px)) var(--space-6) calc(var(--space-12) + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    background-color: color-mix(in srgb, var(--color-bg) 94%, transparent);
+    backdrop-filter: blur(2rem);
+    -webkit-backdrop-filter: blur(2rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms var(--ease), visibility 500ms;
+  }
+  .menu--ouvert { opacity: 1; visibility: visible; }
+  .menu__liens { display: grid; gap: var(--space-4); }
+  .menu__lien {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 3.6rem;
+    line-height: 1.15;
+    opacity: 0;
+    transform: translateY(1.2rem);
+    transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+  }
+  .menu--ouvert .menu__lien { opacity: 1; transform: none; }
+  .menu__liens li:nth-child(2) .menu__lien { transition-delay: 60ms; }
+  .menu__liens li:nth-child(3) .menu__lien { transition-delay: 120ms; }
+  .menu__liens li:nth-child(4) .menu__lien { transition-delay: 180ms; }
+  .menu__liens li:nth-child(5) .menu__lien { transition-delay: 240ms; }
+  .menu__pied { display: grid; gap: var(--space-4); padding-top: var(--space-6); border-top: var(--border-width) solid var(--color-line); }
+  .menu__pied .langues { margin-left: calc(var(--space-2) * -1); }
+  .menu__contact { font-size: var(--fs-sm); color: var(--color-text-muted); }
+  @media (min-width: 64em) { .menu { display: none; } }
 
   /* Hero */
   .hero { position: relative; display: grid; place-items: center; min-height: 100svh; overflow: hidden; text-align: center; }
@@ -175,9 +256,9 @@
   .hero__mote:nth-child(4) { left: 63%; animation-delay: -2s; animation-duration: 16s; }
   .hero__mote:nth-child(5) { left: 78%; animation-delay: -11s; }
   .hero__mote:nth-child(6) { left: 90%; animation-delay: -7s; animation-duration: 20s; }
-  .hero__content { position: relative; display: grid; gap: var(--space-6); justify-items: center; padding-inline: var(--space-6); }
+  .hero__content { position: relative; display: grid; gap: var(--space-6); justify-items: center; padding: var(--space-24) var(--space-6) var(--space-16); }
   .hero__title { max-width: 11ch; font-size: var(--fs-h1); letter-spacing: -0.01em; }
-  .hero__lead { max-width: 38ch; font-size: var(--fs-md); color: var(--color-text-muted); }
+  .hero__lead { max-width: 34ch; font-size: var(--fs-md); color: var(--color-text-muted); }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: center; margin-top: var(--space-2); }
   .hero__breath {
     display: inline-flex;
@@ -251,7 +332,8 @@
   /* Soins */
   .soin { display: grid; gap: var(--space-4); padding-block: var(--space-8); border-top: var(--border-width) solid var(--color-line); transition: padding-inline 500ms var(--ease), background-color 500ms ease; }
   .soin:last-child { border-bottom: var(--border-width) solid var(--color-line); }
-  .soin:hover { padding-inline: var(--space-4); background-color: color-mix(in srgb, var(--color-surface) 60%, transparent); }
+  @media (hover: hover) { .soin:hover { padding-inline: var(--space-4); }}
+  .soin:hover { background-color: color-mix(in srgb, var(--color-surface) 60%, transparent); }
   .soin__name { display: flex; gap: var(--space-4); align-items: center; font-size: var(--fs-h3); }
   .soin__dot { flex: none; width: 1.6rem; height: 1.6rem; border-radius: var(--radius-full); transition: transform 500ms var(--ease); }
   .soin:hover .soin__dot { transform: scale(1.6); }
@@ -344,7 +426,7 @@
   .rdv__title { font-size: var(--fs-h2); }
   .rdv__text { max-width: 44ch; margin-top: var(--space-4); color: var(--color-text-muted); }
   .rdv__infos { display: grid; gap: var(--space-4); }
-  .rdv__row { display: flex; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: var(--border-width) solid var(--color-line); }
+  .rdv__row { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: var(--space-4); overflow-wrap: anywhere; gap: var(--space-4); padding-bottom: var(--space-4); border-bottom: var(--border-width) solid var(--color-line); }
   .rdv__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-4); }
   @media (min-width: 64em) { .rdv { grid-template-columns: 1fr 1fr; gap: var(--space-24); align-items: end; } }
 
@@ -372,7 +454,8 @@
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(1.2rem);
   }
-  .sons__label { padding-inline: var(--space-3) var(--space-1); font-size: var(--fs-xs); color: var(--color-text-muted); }
+  .sons__label { display: none; padding-inline: var(--space-3) var(--space-1); font-size: var(--fs-xs); color: var(--color-text-muted); }
+  @media (min-width: 48em) { .sons__label { display: block; } }
   .son {
     position: relative;
     display: grid;
@@ -399,17 +482,18 @@
     inset: 0;
     z-index: 50;
     display: grid;
-    place-items: center;
+    overflow-y: auto;
     padding: var(--space-6);
     padding-top: calc(var(--space-6) + env(safe-area-inset-top, 0px));
     padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
     text-align: center;
     background-color: color-mix(in srgb, var(--color-bg) 72%, transparent);
     backdrop-filter: blur(2.4rem);
+    -webkit-backdrop-filter: blur(2.4rem);
     transition: opacity 1.2s var(--ease), visibility 1.2s;
   }
   .accueil--cache { opacity: 0; visibility: hidden; }
-  .accueil__boite { display: grid; gap: var(--space-6); justify-items: center; max-width: 46rem; }
+  .accueil__boite { display: grid; margin: auto; gap: var(--space-6); justify-items: center; max-width: 46rem; }
   .accueil__cercle { position: relative; width: 9.6rem; aspect-ratio: 1 / 1; }
   .accueil__cercle::before, .accueil__cercle::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius-full); }
   .accueil__cercle::before { background: conic-gradient(var(--color-lavender), var(--color-apricot), var(--color-jade), var(--color-lavender)); filter: blur(1.6rem); animation: breathe var(--breath) ease-in-out infinite; }
@@ -455,7 +539,6 @@
   .langue:hover { color: var(--color-text); }
   .langue[aria-pressed="true"] { color: var(--color-text); }
   .langue[aria-pressed="true"]::after { transform: translateX(-50%) scale(1); }
-  .nav__droite { display: flex; gap: var(--space-8); align-items: center; }
   [data-i18n], [data-i18n-html] { transition: opacity 260ms ease; }
   .is-switching [data-i18n], .is-switching [data-i18n-html] { opacity: 0; }
 
@@ -491,8 +574,28 @@
       </nav>
       <div class="langues" role="group" data-i18n-attr="aria-label:lang.label" data-langues></div>
     </div>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu" data-burger data-i18n-attr="aria-label:nav.menu">
+      <span class="nav__burger-ligne"></span>
+      <span class="nav__burger-ligne"></span>
+    </button>
   </div>
 </header>
+
+<div class="menu" id="menu" data-menu>
+  <nav data-i18n-attr="aria-label:nav.aria">
+    <ul class="menu__liens">
+      <li><a class="menu__lien" href="#energie" data-i18n="nav.energie"></a></li>
+      <li><a class="menu__lien" href="#soins" data-i18n="nav.soins"></a></li>
+      <li><a class="menu__lien" href="#accompagnement" data-i18n="nav.accomp"></a></li>
+      <li><a class="menu__lien" href="#faq" data-i18n="nav.faq"></a></li>
+      <li><a class="menu__lien" href="#rdv" data-i18n="nav.rdv"></a></li>
+    </ul>
+  </nav>
+  <div class="menu__pied">
+    <div class="langues" role="group" data-i18n-attr="aria-label:lang.label" data-langues></div>
+    <p class="menu__contact"><a class="link" href="tel:+33600000000">+33 6 00 00 00 00</a></p>
+  </div>
+</div>
 
 <main>
   <section class="hero" data-hero>
@@ -756,7 +859,7 @@
     fr: {
       "meta.titre": "Presencia & Energía — Soins énergétiques à Annecy",
       "lang.label": "Langue",
-      "nav.aria": "Navigation principale",
+      "nav.aria": "Navigation principale", "nav.menu": "Menu",
       "nav.energie": "Le soin énergétique", "nav.soins": "Soins", "nav.accomp": "Accompagnement", "nav.faq": "Questions", "nav.rdv": "Rendez-vous",
       "accueil.titre": "Bienvenue",
       "accueil.texte": "Ce site s'accompagne d'une musique douce qui évolue au fil de votre visite. Vous pourrez la couper à tout moment, en bas à droite.",
@@ -816,7 +919,7 @@
     en: {
       "meta.titre": "Presencia & Energía — Energy healing in Annecy",
       "lang.label": "Language",
-      "nav.aria": "Main navigation",
+      "nav.aria": "Main navigation", "nav.menu": "Menu",
       "nav.energie": "Energy healing", "nav.soins": "Treatments", "nav.accomp": "Guidance", "nav.faq": "Questions", "nav.rdv": "Book",
       "accueil.titre": "Welcome",
       "accueil.texte": "This site comes with soft music that evolves as you browse. You can turn it off at any time, bottom right.",
@@ -876,7 +979,7 @@
     es: {
       "meta.titre": "Presencia & Energía — Terapias energéticas en Annecy",
       "lang.label": "Idioma",
-      "nav.aria": "Navegación principal",
+      "nav.aria": "Navegación principal", "nav.menu": "Menú",
       "nav.energie": "La terapia energética", "nav.soins": "Terapias", "nav.accomp": "Acompañamiento", "nav.faq": "Preguntas", "nav.rdv": "Cita",
       "accueil.titre": "Bienvenida",
       "accueil.texte": "Este sitio va acompañado de una música suave que evoluciona durante tu visita. Puedes apagarla en cualquier momento, abajo a la derecha.",
@@ -1047,6 +1150,26 @@
     dots.append(b);
   });
   if (!reduce) setInterval(() => show((current + 1) % T.fr.temoignages.length), 8000);
+
+  // Menu mobile
+  const burger = document.querySelector('[data-burger]');
+  const menu = document.querySelector('[data-menu]');
+  const ouvrirMenu = (ouvert) => {
+    burger.setAttribute('aria-expanded', String(ouvert));
+    menu.classList.toggle('menu--ouvert', ouvert);
+    document.body.classList.toggle('is-locked', ouvert);
+  };
+  burger.addEventListener('click', () => ouvrirMenu(burger.getAttribute('aria-expanded') !== 'true'));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => ouvrirMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') ouvrirMenu(false); });
+  window.matchMedia('(min-width: 64em)').addEventListener('change', (e) => { if (e.matches) ouvrirMenu(false); });
+
+  // Header au défilement
+  const header = document.querySelector('.nav');
+  const majHeader = () => header.classList.toggle('nav--scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', majHeader, { passive: true });
+  majHeader();
+
 
   appliquer();
 
