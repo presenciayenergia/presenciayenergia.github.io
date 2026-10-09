@@ -687,6 +687,22 @@
   .repere__point--actif { width: 1.2rem; height: 1.2rem; background-color: var(--halo, var(--color-jade)); }
   .repere__point--actif::after { content: ""; position: absolute; inset: 0; border: var(--border-width) solid var(--halo, var(--color-jade)); border-radius: var(--radius-full); animation: onde 3.5s ease-out infinite; }
 
+
+  /* Icône de carte (bloc ```icone) */
+  .icone { position: absolute; top: var(--space-8); right: var(--space-8); width: 3.2rem; height: 3.2rem; fill: none; stroke: color-mix(in srgb, var(--halo) 65%, var(--color-text)); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; transition: transform 600ms var(--ease); }
+  .carte:hover .icone { transform: translateY(-0.3rem) rotate(-4deg); }
+
+  /* Encadrés : un point qui respire en tête du filet */
+  .encadre { position: relative; }
+  .encadre::before { content: ""; position: absolute; top: -0.4rem; left: -0.55rem; width: 1.1rem; height: 1.1rem; border-radius: var(--radius-full); background-color: var(--halo); animation: pouls 4s ease-out infinite; }
+  @keyframes pouls { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--halo) 70%, transparent); } 70%, 100% { box-shadow: 0 0 0 1rem transparent; } }
+  /* « Unique » : un cercle tracé à main levée, en filigrane */
+  .encadre--tip::after { content: ""; position: absolute; z-index: -1; right: 0; top: 50%; width: 9rem; height: 9rem; transform: translateY(-50%) rotate(-12deg); background-color: var(--halo); opacity: 0.55;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M52 9c23 1 39 19 39 41 0 24-18 41-41 41C27 91 9 73 9 50 9 28 27 11 49 11c3 0 6 1 9 2' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M52 9c23 1 39 19 39 41 0 24-18 41-41 41C27 91 9 73 9 50 9 28 27 11 49 11c3 0 6 1 9 2' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .encadre--tip { padding-right: 11rem; isolation: isolate; }
+  @media (max-width: 47.99em) { .encadre--tip { padding-right: 0; } .encadre--tip::after { opacity: 0.25; } }
+
   /* Formulaire */
   .formulaire { display: grid; gap: var(--space-6); margin-top: var(--space-8); }
   .champ { display: grid; gap: var(--space-2); }
@@ -843,10 +859,10 @@
 </div></li></ul></div></section>
 <section class="section section--texte" id="es-acompanamiento"><div class="container"><header class="section__entete"><h2 class="section__title">Acompañamiento</h2><div class="accroche"><p>Una sesión alivia, varias sesiones instalan un cambio, un proceso continuado transforma tu manera de habitarte.</p>
 </div></header><div class="sous-parties"><div class="sous-partie"><h3 class="sous-partie__titre">Para todos los seres</h3><div class="accroche"><p>El acompañamiento puede ofrecerse a personas, animales, plantas y espacios, respetando la naturaleza, la sensibilidad y las necesidades de cada uno.</p>
-</div><ul class="cartes"><li class="carte carte--jade"><h4 class="carte__titre">Personas</h4><div class="carte__accroche"><p>Favorecer una sensación de calma, equilibrio y bienestar.</p>
-</div></li><li class="carte carte--apricot"><h4 class="carte__titre">Animales</h4><div class="carte__accroche"><p>Acompañar con respeto su sensibilidad y su ritmo.</p>
-</div></li><li class="carte carte--lavender"><h4 class="carte__titre">Plantas</h4><div class="carte__accroche"><p>Armonizar su entorno y su vitalidad.</p>
-</div></li><li class="carte carte--ciel"><h4 class="carte__titre">Espacios</h4><div class="carte__accroche"><p>Apoyar una relación más consciente con el lugar que habitas.</p>
+</div><ul class="cartes"><li class="carte carte--jade"><h4 class="carte__titre">Personas</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M5 20.5c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg><div class="carte__accroche"><p>Favorecer una sensación de calma, equilibrio y bienestar.</p>
+</div></li><li class="carte carte--apricot"><h4 class="carte__titre">Animales</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="3.6" ry="3.2"/><circle cx="6.3" cy="10.6" r="1.6"/><circle cx="9.6" cy="6.8" r="1.6"/><circle cx="14.4" cy="6.8" r="1.6"/><circle cx="17.7" cy="10.6" r="1.6"/></svg><div class="carte__accroche"><p>Acompañar con respeto su sensibilidad y su ritmo.</p>
+</div></li><li class="carte carte--lavender"><h4 class="carte__titre">Plantas</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 14c-3.8 0-6-2.4-6-6.2 3.6 0 6 2.3 6 6.2Z"/><path d="M12 12c0-3.6 2.3-6 6-6 0 3.6-2.2 6-6 6Z"/></svg><div class="carte__accroche"><p>Armonizar su entorno y su vitalidad.</p>
+</div></li><li class="carte carte--ciel"><h4 class="carte__titre">Espacios</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4.5l8.5 6.5"/><path d="M6 9.5V20h12V9.5"/><path d="M10.2 20v-4.6h3.6V20"/></svg><div class="carte__accroche"><p>Apoyar una relación más consciente con el lugar que habitas.</p>
 </div></li></ul></div><div class="sous-partie"><h3 class="sous-partie__titre">Un enfoque basado en el respeto</h3><div class="prose"><div class="encadre encadre--note"><p>Ofrezco un acompañamiento energético basado en el respeto, la escucha atenta y la presencia consciente. Cada sesión se adapta al momento vital y a las necesidades de la persona, creando un espacio seguro, confidencial y libre de juicios.</p>
 <p>El objetivo no es imponer respuestas ni forzar cambios, sino facilitar una pausa para observar lo que ocurre en el cuerpo, las emociones y la mente, siempre respetando tu ritmo y tu autonomía.</p>
 </div></div></div><div class="sous-partie"><h3 class="sous-partie__titre">Cada experiencia es única</h3><div class="prose"><div class="encadre encadre--tip"><p>Cada persona llega con una historia, unas necesidades y un momento vital diferentes. Por eso, el acompañamiento se adapta a tu ritmo y a aquello que estás dispuesto a explorar en cada sesión.</p>
@@ -972,10 +988,10 @@
 </div></li></ul></div></section>
 <section class="section section--texte" id="fr-acompanamiento"><div class="container"><header class="section__entete"><h2 class="section__title">Accompagnement</h2><div class="accroche"><p>Une séance soulage, plusieurs séances installent un changement, un processus suivi transforme votre manière d'habiter votre corps.</p>
 </div></header><div class="sous-parties"><div class="sous-partie"><h3 class="sous-partie__titre">Pour tous les êtres</h3><div class="accroche"><p>L'accompagnement peut s'adresser aux personnes, aux animaux, aux plantes et aux lieux, dans le respect de la nature et de la sensibilité de chacun.</p>
-</div><ul class="cartes"><li class="carte carte--jade"><h4 class="carte__titre">Personnes</h4><div class="carte__accroche"><p>Favoriser le calme, l'équilibre et le bien-être.</p>
-</div></li><li class="carte carte--apricot"><h4 class="carte__titre">Animaux</h4><div class="carte__accroche"><p>Accompagner avec respect leur sensibilité et leur rythme.</p>
-</div></li><li class="carte carte--lavender"><h4 class="carte__titre">Plantes</h4><div class="carte__accroche"><p>Harmoniser leur environnement et leur vitalité.</p>
-</div></li><li class="carte carte--ciel"><h4 class="carte__titre">Lieux</h4><div class="carte__accroche"><p>Soutenir une relation plus consciente avec l'endroit où vous vivez.</p>
+</div><ul class="cartes"><li class="carte carte--jade"><h4 class="carte__titre">Personnes</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M5 20.5c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg><div class="carte__accroche"><p>Favoriser le calme, l'équilibre et le bien-être.</p>
+</div></li><li class="carte carte--apricot"><h4 class="carte__titre">Animaux</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="3.6" ry="3.2"/><circle cx="6.3" cy="10.6" r="1.6"/><circle cx="9.6" cy="6.8" r="1.6"/><circle cx="14.4" cy="6.8" r="1.6"/><circle cx="17.7" cy="10.6" r="1.6"/></svg><div class="carte__accroche"><p>Accompagner avec respect leur sensibilité et leur rythme.</p>
+</div></li><li class="carte carte--lavender"><h4 class="carte__titre">Plantes</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 14c-3.8 0-6-2.4-6-6.2 3.6 0 6 2.3 6 6.2Z"/><path d="M12 12c0-3.6 2.3-6 6-6 0 3.6-2.2 6-6 6Z"/></svg><div class="carte__accroche"><p>Harmoniser leur environnement et leur vitalité.</p>
+</div></li><li class="carte carte--ciel"><h4 class="carte__titre">Lieux</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4.5l8.5 6.5"/><path d="M6 9.5V20h12V9.5"/><path d="M10.2 20v-4.6h3.6V20"/></svg><div class="carte__accroche"><p>Soutenir une relation plus consciente avec l'endroit où vous vivez.</p>
 </div></li></ul></div><div class="sous-partie"><h3 class="sous-partie__titre">Une approche fondée sur le respect</h3><div class="prose"><div class="encadre encadre--note"><p>Je propose un accompagnement fondé sur le respect, l'écoute attentive et la présence. Chaque séance s'adapte à votre moment de vie et crée un espace sûr, confidentiel et sans jugement.</p>
 <p>Il ne s'agit pas d'imposer des réponses ni de forcer un changement, mais d'offrir une pause pour observer ce qui se passe dans le corps, les émotions et l'esprit, en respectant votre rythme et votre autonomie.</p>
 </div></div></div><div class="sous-partie"><h3 class="sous-partie__titre">Chaque expérience est unique</h3><div class="prose"><div class="encadre encadre--tip"><p>Chaque personne arrive avec son histoire, ses besoins et son moment de vie. L'accompagnement s'adapte donc à votre rythme et à ce que vous êtes prêt à explorer.</p>
@@ -1101,10 +1117,10 @@
 </div></li></ul></div></section>
 <section class="section section--texte" id="en-acompanamiento"><div class="container"><header class="section__entete"><h2 class="section__title">Guidance</h2><div class="accroche"><p>One session brings relief, several sessions bring change, an ongoing process transforms the way you inhabit yourself.</p>
 </div></header><div class="sous-parties"><div class="sous-partie"><h3 class="sous-partie__titre">For all beings</h3><div class="accroche"><p>Guidance can be offered to people, animals, plants and spaces, respecting the nature and sensitivity of each.</p>
-</div><ul class="cartes"><li class="carte carte--jade"><h4 class="carte__titre">People</h4><div class="carte__accroche"><p>Supporting calm, balance and wellbeing.</p>
-</div></li><li class="carte carte--apricot"><h4 class="carte__titre">Animals</h4><div class="carte__accroche"><p>Respecting their sensitivity and their pace.</p>
-</div></li><li class="carte carte--lavender"><h4 class="carte__titre">Plants</h4><div class="carte__accroche"><p>Harmonising their surroundings and vitality.</p>
-</div></li><li class="carte carte--ciel"><h4 class="carte__titre">Spaces</h4><div class="carte__accroche"><p>Supporting a more conscious relationship with the place you live in.</p>
+</div><ul class="cartes"><li class="carte carte--jade"><h4 class="carte__titre">People</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M5 20.5c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg><div class="carte__accroche"><p>Supporting calm, balance and wellbeing.</p>
+</div></li><li class="carte carte--apricot"><h4 class="carte__titre">Animals</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="3.6" ry="3.2"/><circle cx="6.3" cy="10.6" r="1.6"/><circle cx="9.6" cy="6.8" r="1.6"/><circle cx="14.4" cy="6.8" r="1.6"/><circle cx="17.7" cy="10.6" r="1.6"/></svg><div class="carte__accroche"><p>Respecting their sensitivity and their pace.</p>
+</div></li><li class="carte carte--lavender"><h4 class="carte__titre">Plants</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 14c-3.8 0-6-2.4-6-6.2 3.6 0 6 2.3 6 6.2Z"/><path d="M12 12c0-3.6 2.3-6 6-6 0 3.6-2.2 6-6 6Z"/></svg><div class="carte__accroche"><p>Harmonising their surroundings and vitality.</p>
+</div></li><li class="carte carte--ciel"><h4 class="carte__titre">Spaces</h4><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4.5l8.5 6.5"/><path d="M6 9.5V20h12V9.5"/><path d="M10.2 20v-4.6h3.6V20"/></svg><div class="carte__accroche"><p>Supporting a more conscious relationship with the place you live in.</p>
 </div></li></ul></div><div class="sous-partie"><h3 class="sous-partie__titre">An approach based on respect</h3><div class="prose"><div class="encadre encadre--note"><p>I offer energy guidance based on respect, attentive listening and conscious presence. Each session adapts to your moment in life and creates a safe, confidential, non-judgmental space.</p>
 <p>The aim is not to impose answers or force change, but to offer a pause to observe what is happening in your body, emotions and mind, always respecting your pace and autonomy.</p>
 </div></div></div><div class="sous-partie"><h3 class="sous-partie__titre">Every experience is unique</h3><div class="prose"><div class="encadre encadre--tip"><p>Everyone arrives with their own story, needs and moment in life. Guidance therefore adapts to your pace and to what you are ready to explore.</p>
