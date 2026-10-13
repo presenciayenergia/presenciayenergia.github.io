@@ -2855,7 +2855,7 @@
         <div class="ruban__piste"><span class="ruban__mot">Arraigo</span><span class="ruban__mot">Calma</span><span
             class="ruban__mot">Aliento</span><span class="ruban__mot">Presencia</span><span
             class="ruban__mot">Equilibrio</span><span class="ruban__mot">Dulzura</span><span
-            class="ruban__mot">Pazzz</span><span class="ruban__mot">Arraigo</span><span
+            class="ruban__mot">Pace</span><span class="ruban__mot">Arraigo</span><span
             class="ruban__mot">Calma</span><span class="ruban__mot">Aliento</span><span
             class="ruban__mot">Presencia</span><span class="ruban__mot">Equilibrio</span><span
             class="ruban__mot">Dulzura</span><span class="ruban__mot">Paz</span></div>
@@ -5014,40 +5014,78 @@
           </header>
           <div class="prose">
             <p>When you send, your email app will open: attach your two photos and proof of payment.</p>
-            <form class="formulaire" data-formulaire data-courriel="contacto@presencia-energia.com"
-              data-sujet="Presencia &amp; Energía — Contact">
-              <div class="champ"><label class="champ__label" for="champ-en-17" data-libelle="Full name">Full name <span
-                    class="champ__requis" aria-hidden="true">*</span></label><input class="champ__saisie" type="text"
-                  id="champ-en-17" name="champ-en-17" required></div>
-              <div class="champ"><label class="champ__label" for="champ-en-18" data-libelle="Email">Email <span
-                    class="champ__requis" aria-hidden="true">*</span></label><input class="champ__saisie" type="email"
-                  id="champ-en-18" name="champ-en-18" autocomplete="email" required></div>
-              <div class="champ"><label class="champ__label" for="champ-en-19" data-libelle="Phone">Phone</label><input
-                  class="champ__saisie" type="tel" id="champ-en-19" name="champ-en-19" autocomplete="tel"></div>
-              <div class="champ"><label class="champ__label" for="champ-en-20"
-                  data-libelle="Country">Country</label><input class="champ__saisie" type="text" id="champ-en-20"
-                  name="champ-en-20"></div>
-              <div class="champ"><label class="champ__label" for="champ-en-21"
-                  data-libelle="Who is the session for?">Who is the session for?</label><select class="champ__saisie"
-                  id="champ-en-21" name="champ-en-21">
+            <!-- FORMULAIRE DE CONTACT (HTML) -->
+            <form class="formulaire" action="https://formsubmit.co" method="POST">
+
+              <!-- CONFIGURATION POUR FORMSUBMIT (Masqué pour le client) -->
+              <!-- 1. Sujet de l'e-mail que vous allez recevoir -->
+              <input type="hidden" name="_subject" value="Presencia & Energía — Contacto">
+
+              <!-- 2. Désactive le captcha pour les prochains envois (après activation) -->
+              <input type="hidden" name="_captcha" value="false">
+
+              <!-- CHAMPS VISIBLES DU FORMULAIRE -->
+              <div class="champ">
+                <label class="champ__label" for="champ-es-1" data-libelle="Nombre y apellido">Nombre y apellido <span
+                    class="champ__requis" aria-hidden="true">*</span></label>
+                <input class="champ__saisie" type="text" id="champ-es-1" name="Nombre y Apellido" required>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="champ-es-2" data-libelle="Correo">Correo <span class="champ__requis"
+                    aria-hidden="true">*</span></label>
+                <input class="champ__saisie" type="email" id="champ-es-2" name="Email" autocomplete="email" required>
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="champ-es-3" data-libelle="Teléfono">Teléfono</label>
+                <input class="champ__saisie" type="tel" id="champ-es-3" name="Teléfono" autocomplete="tel">
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="champ-es-4" data-libelle="País">País</label>
+                <input class="champ__saisie" type="text" id="champ-es-4" name="País">
+              </div>
+
+              <div class="champ">
+                <label class="champ__label" for="champ-es-5" data-libelle="¿Para quién es la sesión?">¿Para quién es la
+                  sesión?</label>
+                <select class="champ__saisie" id="champ-es-5" name="¿Para quién es la sesión?">
                   <option value=""></option>
-                  <option>Person</option>
+                  <option>Persona</option>
                   <option>Animal</option>
-                  <option>Plant</option>
-                  <option>Space</option>
-                </select></div>
-              <div class="champ champ--large"><label class="champ__label" for="champ-en-22"
-                  data-libelle="Message">Message</label><textarea class="champ__saisie" id="champ-en-22"
-                  name="champ-en-22"></textarea></div>
-              <div class="champ champ--case"><input type="checkbox" id="champ-en-23" name="champ-en-23" required><label
-                  class="champ__label" for="champ-en-23" data-libelle="I have prepared my two photos, front and back">I
-                  have prepared my two photos, front and back <span class="champ__requis"
-                    aria-hidden="true">*</span></label></div>
-              <div class="champ champ--case"><input type="checkbox" id="champ-en-24" name="champ-en-24" required><label
-                  class="champ__label" for="champ-en-24" data-libelle="I have read the payment and cancellation terms">I
-                  have read the payment and cancellation terms <span class="champ__requis"
-                    aria-hidden="true">*</span></label></div><button class="btn btn--plein" type="submit">Send the
-                request</button>
+                  <option>Planta</option>
+                  <option>Espacio</option>
+                </select>
+              </div>
+
+              <div class="champ champ--large">
+                <label class="champ__label" for="champ-es-6" data-libelle="Mensaje">Mensaje</label>
+                <textarea class="champ__saisie" id="champ-es-6" name="Mensaje"></textarea>
+              </div>
+
+              <div class="champ champ--case">
+                <input type="checkbox" id="champ-es-7" name="Fotos Preparadas" required>
+                <label class="champ__label" for="champ-es-7"
+                  data-libelle="He preparado mis dos fotografías, de frente y de espaldas">He preparado mis dos
+                  fotografías, de frente y de espaldas <span class="champ__requis" aria-hidden="true">*</span></label>
+              </div>
+
+              <div class="champ champ--case">
+                <input type="checkbox" id="champ-es-8" name="Condiciones Leídas" required>
+                <label class="champ__label" for="champ-es-8"
+                  data-libelle="He leído las condiciones de pago y de anulación">He leído las condiciones de pago y de
+                  anulación <span class="champ__requis" aria-hidden="true">*</span></label>
+              </div>
+
+              <!-- BOUTON D'ENVOI -->
+              <button class="btn btn--plein" type="submit">Enviar la solicitud</button>
+
+              <!-- ZONE POUR LE MESSAGE DE SUCCÈS (Masquée par défaut) -->
+              <div id="message-succes"
+                style="display: none; margin-top: 20px; padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center; font-weight: bold;">
+                ¡Gracias! Tu solicitud ha sido enviada con éxito. Nos pondremos en contacto contigo pronto.
+              </div>
             </form>
           </div>
         </div>
@@ -5624,6 +5662,54 @@
       });
 
     })();
+  </script>
+  <!-- SCRIPT JAVASCRIPT VANILLA -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const formulario = document.querySelector(".formulaire");
+      const messageSucces = document.getElementById("message-succes");
+      const boutonSoumettre = formulario.querySelector("button[type='submit']");
+
+      formulario.addEventListener("submit", function (event) {
+        // Empêche le rechargement immédiat de la page
+        event.preventDefault();
+
+        // Bloque le bouton pour éviter les clics multiples
+        boutonSoumettre.disabled = true;
+        boutonSoumettre.innerText = "Enviando...";
+
+        // Prépare les données du formulaire
+        const donnees = new FormData(formulaire);
+
+        // Envoie les données en arrière-plan
+        fetch(formulaire.action, {
+          method: "POST",
+          body: donnees,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              // Affiche le message vert de succès
+              messageSucces.style.display = "block";
+              boutonSoumettre.innerText = "¡Enviado!";
+
+              // Optionnel : vide les champs du formulaire après l'envoi
+              formulario.reset();
+            } else {
+              alert("Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.");
+              boutonSoumettre.disabled = false;
+              boutonSoumettre.innerText = "Enviar la solicitud";
+            }
+          })
+          .catch(error => {
+            alert("Error de conexión. Inténtalo más tarde.");
+            boutonSoumettre.disabled = false;
+            boutonSoumettre.innerText = "Enviar la solicitud";
+          });
+      });
+    });
   </script>
 </body>
 
